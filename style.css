@@ -133,3 +133,229 @@ h2{
     font-weight: 400;
     font-size: 19px;  
 }
+
+
+.comecePeloComeco{
+    width: 214px;
+    height: 23px;
+
+    margin-top: 106px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.informacoesBasicas{
+    margin-top: 29px;
+    margin-bottom: 29px;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: #FFFFFF;
+
+    width: 375px;
+    height: 256px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.caixaDeInputTela3{
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    width: 341px;
+    height: 46px;
+
+    margin-bottom: 9px;
+    padding-left: 14px;
+
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+
+    
+
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+}
+
+.tituloCriarQuizz{
+    margin-top: 21px;
+}
+
+.botaoProsseguir{
+    width: 324px;
+    height: 54px;
+
+    background: #EC362D;
+    border-radius: 15px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFF5F4;
+}
+input{
+    width: 100%;
+}
+
+.perguntas{
+    margin-top: 29px;
+    background-color: #FFFFFF;
+}
+.containerPerguntasAberto{
+    width: 375px;
+    height: 800px;
+
+    background-color: #FFFFFF ;
+
+    padding-left: 14px;
+
+    margin-bottom: 24px;
+}
+.containerPerguntasFechado{
+    width: 375px;
+    height: 74px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #FFFFFF;
+
+    padding-left: 17px;
+
+    margin-bottom: 22px;    
+}
+.pergunta1{
+    margin-top: 27px;
+}
+.respostaCorreta{
+    margin-top: 28px;
+}
+.respostaIncorreta{
+    margin-top: 28px;
+}
+.titulos{
+    width: 195px;
+    height: 23px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+.tituloCriarRespostas{
+    margin-top: 32px;
+}
+.iconeEditar{
+    width: 26px;
+    height: 23px;
+
+    margin-right: 25px;
+}
+.niveis{
+    margin-top: 29px;
+    background-color: #FFFFFF;
+}
+.containerNiveisAberto{
+    width: 375px;
+    height: 439px;
+
+    background-color: #FFFFFF;
+
+    padding-left: 14px;
+
+    margin-bottom: 27px;
+}
+.caixaDeInputDescricao{
+    box-sizing: border-box;
+
+    width: 341px;
+    height: 177px;
+
+    margin-bottom: 9px;
+    padding-left: 14px;
+    padding-top: 13px;
+
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+
+    
+
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+}
+.containerNiveisFechado{
+    width: 375px;
+    height: 74px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #FFFFFF;
+
+    padding-left: 17px;
+
+    margin-bottom: 22px;    
+}
+.botaoAcessar{
+    width: 221px;
+    height: 44px;
+
+    background: #EC362D;
+    border-radius: 15px;
+
+    margin-top: 24px;
+    margin-bottom: 9px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFF5F4;
+}
+
+.seuQuizzEstaPronto{
+    width: 214px;
+    height: 23px;
+
+    margin-top: 106px;
+    margin-bottom: 29px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
