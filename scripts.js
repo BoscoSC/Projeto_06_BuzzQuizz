@@ -1,6 +1,6 @@
-function tela3pt1(){
-    const elemento = document.querySelector('.conteudo');
-    elemento.innerHTML = `<div class="comecePeloComeco">
+function tela3pt1() {
+  const elemento = document.querySelector(".conteudo");
+  elemento.innerHTML = `<div class="comecePeloComeco">
     Comece pelo começo
 </div>
 <div class="informacoesBasicas">
@@ -8,7 +8,7 @@ function tela3pt1(){
         <input class="input1" id=”placeholder-text” type="text" placeholder="Título do seu quizz">
     </div>
     <div class="urlCriarQuizz caixaDeInputTela3">
-        <input class="input2" type="text" placeholder="URL da imagem do seu quizz">
+        <input class="input2" type="url" placeholder="URL da imagem do seu quizz">
     </div>
     <div class="qtdePerguntasCriarQuizz caixaDeInputTela3">
         <input class="input3" type="text" placeholder="Quantidade de perguntas do quizz">
@@ -21,12 +21,16 @@ function tela3pt1(){
 <button class="botaoProsseguir" onclick="verificarInformacoes()">
     Prosseguir para criar perguntas
 </button>'
-</div>`
-} 
+</div>`;
+}
 
-function tela3pt2(){
-    const elemento = document.querySelector('.comecePeloComeco');
-    elemento.innerHTML = `
+function tela3pt2() {
+  const limparDiv = document.querySelector(".informacoesBasicas");
+  limparDiv.innerHTML = "";
+  const limparBotao = document.querySelector(".botao");
+  limparBotao.innerHTML = "";
+  const elemento = document.querySelector(".comecePeloComeco");
+  elemento.innerHTML = `
     <div class ="conteudoTela3pt2">
     <div class="comecePeloComeco">
         Crie suas perguntas
@@ -48,7 +52,7 @@ function tela3pt2(){
                 Resposta correta
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input id=”placeholder-text” type="text" placeholder="Resposta correta">
+                <input id=”placeholder-text” type="url" placeholder="Resposta correta">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem">
@@ -102,12 +106,12 @@ function tela3pt2(){
     </div>
     
 </div>
-<br/><br/><br/><br/>`
+<br/><br/><br/><br/>`;
 }
 
-function tela3pt3(){
-    const elemento = document.querySelector('.conteudoTela3pt2');
-    elemento.innerHTML = `<div class="conteudoTela3pt3">
+function tela3pt3() {
+  const elemento = document.querySelector(".conteudoTela3pt2");
+  elemento.innerHTML = `<div class="conteudoTela3pt3">
     <div class="comecePeloComeco">
         Agora, decida os níveis!
     </div>
@@ -151,12 +155,12 @@ function tela3pt3(){
     <
     
     <br/><br/><br/><br/>
-</div>`
+</div>`;
 }
 
-function tela3pt4(){
-    const elemento = document.querySelector('.conteudoTela3pt3')
-    elemento.innerHTML = `<div class="conteudoTelapt4">
+function tela3pt4() {
+  const elemento = document.querySelector(".conteudoTela3pt3");
+  elemento.innerHTML = `<div class="conteudoTelapt4">
     <div class="seuQuizzEstaPronto">
         Seu quizz está pronto!
     </div>
@@ -173,36 +177,30 @@ function tela3pt4(){
         </div>
        
     <br/><br/><br/><br/>
-</div>`
+</div>`;
 }
-
 let urlInput;
-
 function verificarInformacoes() {
   const inputTitulo = document.querySelector(".input1").value;
   const qtdePerguntasInput = document.querySelector(".input3").value;
+  urlInput = document.querySelector(".input2").value;
   const qtdeNiveisInput = document.querySelector(".input4").value;
-    const botao = document.querySelector(".botaoProsseguir");
+  const botao = document.querySelector(".botaoProsseguir");
   if (
-    (inputTitulo.length < 20 ||
-    inputTitulo.length > 65) ||
-    checkUrl() ||
+    inputTitulo.length < 20 ||
+    inputTitulo.length > 65 ||
+    !checkURL(urlInput) ||
     qtdePerguntasInput < 3 ||
     qtdeNiveisInput < 2
   ) {
     alert("Insira as informações corretas");
-    
   } else {
     tela3pt2();
-    
   }
 }
 
-function checkUrl(string) {
-  try {
-    urlInput = new URL(string);
-    console.log("Valid URL!");
-  } catch (err) {
-    console.log("Invalid URL!");
-  }
+function checkURL(urlInput) {
+  const rule =
+    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
+  return rule.test(urlInput);
 }
