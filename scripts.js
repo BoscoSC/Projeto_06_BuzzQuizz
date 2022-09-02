@@ -114,9 +114,12 @@ function tela3pt1() {
     Prosseguir para criar perguntas
 </button>'
 </div>`;
+
 }
 
 function tela3pt2() {
+  const qtdePerguntasInput = document.querySelector(".input3").value;
+  console.log(qtdePerguntasInput);
   const limparDiv = document.querySelector(".informacoesBasicas");
   limparDiv.innerHTML = "";
   const limparBotao = document.querySelector(".botao");
@@ -127,10 +130,16 @@ function tela3pt2() {
     <div class="comecePeloComeco">
         Crie suas perguntas
     </div>
+    <div class="perguntas">`
+    
+    const elemento2 = document.querySelector(".perguntas");
+    
+    for(i=0; i<qtdePerguntasInput; i++){
+    elemento2.innerHTML += `
     <div class="perguntas">
         <div class="containerPerguntasAberto">
             <div class="pergunta1 titulos">
-                Pergunta 1
+                Pergunta ${i + 1}
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
                 <input id=”placeholder-text” type="text" placeholder="Texto da pergunta">
@@ -174,7 +183,10 @@ function tela3pt2() {
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem 3">
             </div>
-        </div>
+        </div>`
+    }
+    elemento2.innerHTML +=
+       `
         <div class="containerPerguntasFechado">
             <div class="pergunta2 titulos">
                 Pergunta 2
