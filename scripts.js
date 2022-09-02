@@ -120,6 +120,10 @@ function tela3pt1() {
 function tela3pt2() {
   const qtdePerguntasInput = document.querySelector(".input3").value;
   console.log(qtdePerguntasInput);
+
+  const qtdeNiveisInput = document.querySelector(".input4").value;
+  console.log(qtdeNiveisInput);
+
   const limparDiv = document.querySelector(".informacoesBasicas");
   limparDiv.innerHTML = "";
   const limparBotao = document.querySelector(".botao");
@@ -133,7 +137,7 @@ function tela3pt2() {
     <div class="perguntas">`
     
     const elemento2 = document.querySelector(".perguntas");
-    
+
     for(i=0; i<qtdePerguntasInput; i++){
     elemento2.innerHTML += `
     <div class="perguntas">
@@ -203,6 +207,11 @@ function tela3pt2() {
             
     </div>
     <br/>
+
+    <div class ="divOculta">
+    ${qtdeNiveisInput}
+    </div>
+
 <div class="botao">
     <button class="botaoProsseguir"  onclick="tela3pt3(this)">
         Prosseguir para criar níveis
@@ -214,15 +223,24 @@ function tela3pt2() {
 }
 
 function tela3pt3() {
+  const qtdeNiveisInput = document.querySelector(".divOculta").innerHTML;
+
+  console.log(qtdeNiveisInput);
   const elemento = document.querySelector(".conteudo");
   elemento.innerHTML = `<div class="conteudo">
     <div class="comecePeloComeco">
         Agora, decida os níveis!
     </div>
-    <div class="niveis">
+    <div class="niveis">`
+    
+    const elemento2 = document.querySelector(".niveis");
+
+    for(i=0; i<qtdeNiveisInput; i++){
+    elemento2.innerHTML +=
+    `<div class="niveis">
         <div class="containerNiveisAberto">
             <div class="nível1 titulos">
-                Nível 1
+                Nível ${i+1}
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
                 <input id=”placeholder-text” type="text" placeholder="Título do nível">
@@ -236,7 +254,10 @@ function tela3pt3() {
             <div class="urlCriarQuizz caixaDeInputDescricao">
                 <input type="text" placeholder="Descrição do nível">
             </div>
-        </div>
+        </div>`
+    }
+        elemento2.innerHTML +=
+        `
         <div class="containerNiveisFechado">
             <div class="pergunta2 titulos">
                 Nivel 2
@@ -304,8 +325,8 @@ function verificarInformacoes() {
     tela3pt2();
   }
 }
-
-function verificarNiveis() {
+//Daniel ta fazendo essa de verificar nivel
+/*function verificarNiveis() {
     const inputTitulo = document.querySelector(".input1").value;
     const qtdePerguntasInput = document.querySelector(".input3").value;
     urlInput = document.querySelector(".input2").value;
@@ -322,7 +343,7 @@ function verificarNiveis() {
     } else {
       tela3pt2();
     }
-  }
+  }*/
 
 function checkURL(urlInput) {
   const rule =
