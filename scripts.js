@@ -12,6 +12,9 @@ function processarResposta(resposta){
     dadosDoQuizz = resposta.data;
 }
 
+function aleatorizador() { 
+	return Math.random() - 0.5; 
+}
 
 function tela2(){
     let i = 9; // valor pra teste, o certo é pegar o index do clicado, PROVAVEL de ser com THIS
@@ -52,7 +55,7 @@ function tela2(){
         console.log(elemento3);
 
         let respostasDoQuizz = dadosDoQuizz[i].questions[aux].answers;
-        console.log(respostasDoQuizz);
+        respostasDoQuizz.sort(aleatorizador);
 
         for(let aux1 = 0; aux1 < respostasDoQuizz.length; aux1++){
             elemento3.innerHTML += `
