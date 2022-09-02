@@ -193,21 +193,21 @@ function tela3pt2() {
                 Respostas incorretas
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input class="input-text" type="text" placeholder="Resposta incorreta 1">
+                <input class="input-incorreta" type="text" placeholder="Resposta incorreta 1">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem 1">
             </div>
         
             <div class="tituloCriarRespostas caixaDeInputTela3">
-                <input class="input-text" type="text" placeholder="Resposta incorreta 2">
+                <input  type="text" placeholder="Resposta incorreta 2">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem 2">
             </div>
             
             <div class="tituloCriarRespostas caixaDeInputTela3">
-                <input class="input-text" type="text" placeholder="Resposta incorreta 3">
+                <input  type="text" placeholder="Resposta incorreta 3">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem 3">
@@ -360,7 +360,8 @@ function verificarInputs() {
      let inputColor = document.querySelector('.hex'); 
     let inputPergunta = document.querySelector('.input-text').value;
     let urlInput = document.querySelector('.input-url').value;
-    if(inputTitle.length <  20 || inputPergunta === "" || !checkURL(urlInput) || !checkColor(inputColor))  {
+    let inputIncorreta = document.querySelector('.input-incorreta')
+    if(inputTitle.length <  20 || inputPergunta === "" || inputIncorreta === "" || !checkURL(urlInput) || !checkColor(inputColor))  {
         alert('Insira as informações corretas!')
     } else {
         tela3pt3();
