@@ -1,3 +1,92 @@
+function recebeQuizz(){
+    let promessa = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
+    promessa.then(processarResposta);
+}
+
+recebeQuizz();
+
+let dadosDoQuizz;
+
+function processarResposta(resposta){
+    console.log(resposta.data);
+    dadosDoQuizz = resposta.data;
+}
+
+
+function tela2(){
+    let i = 9; // valor pra teste, o certo é pegar o index do clicado, PROVAVEL de ser com THIS
+
+    let elemento = document.querySelector('.conteudo');
+    elemento.innerHTML = `
+    <div class="nomeQuizz">
+        <img src="${dadosDoQuizz[i].image}"/>
+        <h2>${dadosDoQuizz[i].title}</h2>
+    </div>
+    
+    <div class="conteudoTela2">
+        
+    </div>`
+
+    let elemento1 = document.querySelector('.conteudoTela2');
+    
+    let perguntasDoQuizz = dadosDoQuizz[i].questions;
+    // console.log(perguntasDoQuizz);
+
+    for(let aux = 0; aux < perguntasDoQuizz.length; aux++){
+        elemento1.innerHTML = elemento1.innerHTML + `
+        <div class="pergunta">
+            <div class="tituloPergunta" style="background-color: ${perguntasDoQuizz[aux].color}">
+                <p>${perguntasDoQuizz[aux].title}</p>
+            </div>
+
+            <div class="opcoesPergunta">
+
+            </div>
+
+
+        </div>`
+
+        let elemento2 = document.querySelectorAll('.opcoesPergunta');
+        console.log(elemento2);
+        let elemento3 = elemento2[elemento2.length-1];
+        console.log(elemento3);
+
+        let respostasDoQuizz = dadosDoQuizz[i].questions[aux].answers;
+        console.log(respostasDoQuizz);
+
+        for(let aux1 = 0; aux1 < respostasDoQuizz.length; aux1++){
+            elemento3.innerHTML += `
+                <div class="opcao">
+                    <img src="${respostasDoQuizz[aux1].image}" />
+                    <p>${respostasDoQuizz[aux1].text}</p>
+                </div>
+            `
+        }
+    }
+
+    elemento1.innerHTML = elemento1.innerHTML + `
+        <div class="nivelResultado">
+            <div class="nivelDoQuizz">
+                <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
+            </div>
+
+            <div class="nivelDescricao">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtJGCO6tTsDqCiz3wygan4VRUGeSh4TFDQWg&usqp=CAU" />
+                <p>
+                    Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop
+                    infinito de comida e clique no botão abaixo para usar o vira-tempo
+                    e reiniciar este teste.
+                </p>
+            </div>
+        </div>
+
+        <div class="botoes">
+            <button class="botaoReiniciar">Reiniciar Quizz</button>
+            <button class="voltarHome">Voltar pra home</button>
+        </div>
+    `
+}
+
 function tela3pt1() {
   const elemento = document.querySelector(".conteudo");
   elemento.innerHTML = `<div class="comecePeloComeco">

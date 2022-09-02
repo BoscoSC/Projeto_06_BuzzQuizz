@@ -303,13 +303,17 @@ h2 {
   color: #484848;
 }
 
-.display-block {
+.botoes {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   margin-top: 35px;
+}
+
+.hidden{
+  display: none;
 }
 
 .caixaDeInputTela3 {
