@@ -331,11 +331,11 @@ function tela3pt4() {
     </div>
 </div>`;
 }
-let urlInput;
+
 function verificarInformacoes() {
   const inputTitulo = document.querySelector(".input1").value;
   const qtdePerguntasInput = document.querySelector(".input3").value;
-  urlInput = document.querySelector(".input2").value;
+  let urlInput = document.querySelector(".input2").value;
   const qtdeNiveisInput = document.querySelector(".input4").value;
   const botao = document.querySelector(".botaoProsseguir");
   if (
