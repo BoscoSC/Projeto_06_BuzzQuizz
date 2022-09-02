@@ -267,17 +267,18 @@ function tela3pt3() {
             <div class="nível1 titulos">
                 Nível ${i+1}
             </div>
+
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input id=”placeholder-text” type="text" placeholder="Título do nível">
+                <input class ="input1" id=”placeholder-text” type="text" placeholder="Título do nível">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input type="text" placeholder="% de acerto mínima">
+                <input class ="input2" type="text" placeholder="% de acerto mínima">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input type="text" placeholder="URL da imagem do nível">
+                <input class ="input3"type="text" placeholder="URL da imagem do nível">
             </div>
             <div class="urlCriarQuizz caixaDeInputDescricao">
-                <input type="text" placeholder="Descrição do nível">
+                <input class = "input4" type="text" placeholder="Descrição do nível">
             </div>
         </div>`
     }
@@ -299,7 +300,7 @@ function tela3pt3() {
     <br/>
 
     <div class="botao">
-    <button class="botaoProsseguir" onclick="tela3pt4(this)">
+    <button class="botaoProsseguir" onclick="verificarNiveis()">
         Finalizar Quizz
     </button>
     
@@ -331,11 +332,11 @@ function tela3pt4() {
     </div>
 </div>`;
 }
-let urlInput;
+
 function verificarInformacoes() {
   const inputTitulo = document.querySelector(".input1").value;
   const qtdePerguntasInput = document.querySelector(".input3").value;
-  urlInput = document.querySelector(".input2").value;
+  let urlInput = document.querySelector(".input2").value;
   const qtdeNiveisInput = document.querySelector(".input4").value;
   const botao = document.querySelector(".botaoProsseguir");
   if (
@@ -351,25 +352,25 @@ function verificarInformacoes() {
   }
 }
 
-//Daniel ta fazendo essa de verificar nivel
-/*function verificarNiveis() {
+
+function verificarNiveis() {
     const inputTitulo = document.querySelector(".input1").value;
-    const qtdePerguntasInput = document.querySelector(".input3").value;
-    urlInput = document.querySelector(".input2").value;
-    const qtdeNiveisInput = document.querySelector(".input4").value;
+    const porcentagemInput = document.querySelector(".input2").value;
+    urlInput = document.querySelector(".input3").value;
+    const descricaoInput = document.querySelector(".input4").value;
     const botao = document.querySelector(".botaoProsseguir");
     if (
-      inputTitulo.length < 20 ||
-      inputTitulo.length > 65 ||
+      inputTitulo.length < 10 ||
       !checkURL(urlInput) ||
-      qtdePerguntasInput < 3 ||
-      qtdeNiveisInput < 2
+      porcentagemInput < 0 ||
+      porcentagemInput > 100 ||
+      descricaoInput.length < 30
     ) {
       alert("Insira as informações corretas");
     } else {
-      tela3pt2();
+      tela3pt4();
     }
-  }*/
+  }
 
 
 
