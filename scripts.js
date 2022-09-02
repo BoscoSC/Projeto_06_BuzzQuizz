@@ -170,11 +170,11 @@ function tela3pt2() {
             <div class="pergunta1 titulos">
                 Pergunta ${i + 1}
             </div>
-            <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input id=”placeholder-text” type="text" placeholder="Texto da pergunta">
+            <div  class="tituloCriarQuizz caixaDeInputTela3">
+                <input class="titulo-input" type="text" placeholder="Texto da pergunta">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input type="text" placeholder="Cor de fundo da pergunta">
+                <input class="hex" type="text" placeholder="Cor de fundo da pergunta">
             </div>
 
 
@@ -182,10 +182,10 @@ function tela3pt2() {
                 Resposta correta
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input id=”placeholder-text” type="url" placeholder="Resposta correta">
+                <input class="input-text" type="url" placeholder="Resposta correta">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input type="text" placeholder="URL da imagem">
+                <input type="text" class="input-url" placeholder="URL da imagem">
             </div>
 
 
@@ -193,21 +193,21 @@ function tela3pt2() {
                 Respostas incorretas
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input id=”placeholder-text” type="text" placeholder="Resposta incorreta 1">
+                <input class="input-text" type="text" placeholder="Resposta incorreta 1">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem 1">
             </div>
         
             <div class="tituloCriarRespostas caixaDeInputTela3">
-                <input id=”placeholder-text” type="text" placeholder="Resposta incorreta 2">
+                <input class="input-text" type="text" placeholder="Resposta incorreta 2">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem 2">
             </div>
             
             <div class="tituloCriarRespostas caixaDeInputTela3">
-                <input id=”placeholder-text” type="text" placeholder="Resposta incorreta 3">
+                <input class="input-text" type="text" placeholder="Resposta incorreta 3">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem 3">
@@ -216,29 +216,12 @@ function tela3pt2() {
     }
     elemento2.innerHTML +=
        `
-        <div class="containerPerguntasFechado">
-            <div class="pergunta2 titulos">
-                Pergunta 2
-            </div>
-            <img src="Vector (1).png" class ="iconeEditar"/>
-        </div>
-        <div class="containerPerguntasFechado">
-            <div class="pergunta3 titulos">
-                Pergunta 3
-            </div>
-            <img src="Vector (1).png" class ="iconeEditar"/>
-        </div>
-            
-            
-    </div>
-    <br/>
-
     <div class ="divOculta">
     ${qtdeNiveisInput}
     </div>
 
 <div class="botao">
-    <button class="botaoProsseguir"  onclick="tela3pt3(this)">
+    <button class="botaoProsseguir"  onclick="verificarInputs()">
         Prosseguir para criar níveis
     </button>
     </div>
@@ -372,10 +355,30 @@ function verificarNiveis() {
     }
   }
 
+function verificarInputs() {
+    let inputTitle = document.querySelector('.titulo-input').value;
+     let inputColor = document.querySelector('.hex'); 
+    let inputPergunta = document.querySelector('.input-text').value;
+    let urlInput = document.querySelector('.input-url').value;
+    if(inputTitle.length <  20 || inputPergunta === "" || !checkURL(urlInput) || !checkColor(inputColor))  {
+        alert('Insira as informações corretas!')
+    } else {
+        tela3pt3();
+    }
+}
 
 
 function checkURL(urlInput) {
+
   const rule =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
   return rule.test(urlInput);
 }
+
+function checkColor(inputColor) {
+    console.log(inputColor)
+    const rule = /^\#([0-9]|[A-F]|[a-f]){6}$/;
+  return rule.test(inputColor);
+}
+
+
