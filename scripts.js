@@ -1,26 +1,47 @@
-function recebeQuizz(){
-    let promessa = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
-    promessa.then(processarResposta);
+let quizzes;
+
+function recebeQuizz() {
+  let promessa = axios.get(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+  );
+  promessa.then(carregarTodosQuizzes);
 }
 
 recebeQuizz();
 
-let dadosDoQuizz;
+/* function processarResposta(resposta) {
+  console.log(resposta.data);
+  dadosDoQuizz = resposta.data;
+} */
 
-function processarResposta(resposta){
-    console.log(resposta.data);
-    dadosDoQuizz = resposta.data;
+function aleatorizador() {
+  return Math.random() - 0.5;
 }
 
-function aleatorizador() { 
-	return Math.random() - 0.5; 
+function carregarTodosQuizzes(resposta) {
+   dadosDoQuizz = resposta.data;
+   console.log(dadosDoQuizz)
+
+  for (let i = 0; i < dadosDoQuizz.length; i++) {
+    const todosQuizzes = document.querySelector(".todosQuizz");
+    todosQuizzes.innerHTML += `<div class="quizzesCaixa">
+               <div onclick="tela2()">
+                 <div class="quizzDisplay">
+                   <img src="${dadosDoQuizz[i].image}"/>
+                   <p>
+                     ${dadosDoQuizz[i].title}
+                   </p>
+                 </div>`;
+  }
 }
 
-function tela2(){
-    let i = 9; // valor pra teste, o certo é pegar o index do clicado, PROVAVEL de ser com THIS
+carregarTodosQuizzes();
 
-    let elemento = document.querySelector('.conteudo');
-    elemento.innerHTML = `
+function tela2() {
+  let i = 9; // valor pra teste, o certo é pegar o index do clicado, PROVAVEL de ser com THIS
+
+  let elemento = document.querySelector(".conteudo");
+  elemento.innerHTML = `
     <div class="nomeQuizz">
         <img src="${dadosDoQuizz[i].image}"/>
         <h2>${dadosDoQuizz[i].title}</h2>
@@ -28,15 +49,17 @@ function tela2(){
     
     <div class="conteudoTela2">
         
-    </div>`
+    </div>`;
 
-    let elemento1 = document.querySelector('.conteudoTela2');
-    
-    let perguntasDoQuizz = dadosDoQuizz[i].questions;
-    // console.log(perguntasDoQuizz);
+  let elemento1 = document.querySelector(".conteudoTela2");
 
-    for(let aux = 0; aux < perguntasDoQuizz.length; aux++){
-        elemento1.innerHTML = elemento1.innerHTML + `
+  let perguntasDoQuizz = dadosDoQuizz[i].questions;
+  // console.log(perguntasDoQuizz);
+
+  for (let aux = 0; aux < perguntasDoQuizz.length; aux++) {
+    elemento1.innerHTML =
+      elemento1.innerHTML +
+      `
         <div class="pergunta">
             <div class="tituloPergunta" style="background-color: ${perguntasDoQuizz[aux].color}">
                 <p>${perguntasDoQuizz[aux].title}</p>
@@ -47,27 +70,29 @@ function tela2(){
             </div>
 
 
-        </div>`
+        </div>`;
 
-        let elemento2 = document.querySelectorAll('.opcoesPergunta');
-        console.log(elemento2);
-        let elemento3 = elemento2[elemento2.length-1];
-        console.log(elemento3);
+    let elemento2 = document.querySelectorAll(".opcoesPergunta");
+    /* console.log(elemento2); */
+    let elemento3 = elemento2[elemento2.length - 1];
+    /* console.log(elemento3); */
 
-        let respostasDoQuizz = dadosDoQuizz[i].questions[aux].answers;
-        respostasDoQuizz.sort(aleatorizador);
+    let respostasDoQuizz = dadosDoQuizz[i].questions[aux].answers;
+    respostasDoQuizz.sort(aleatorizador);
 
-        for(let aux1 = 0; aux1 < respostasDoQuizz.length; aux1++){
-            elemento3.innerHTML += `
+    for (let aux1 = 0; aux1 < respostasDoQuizz.length; aux1++) {
+      elemento3.innerHTML += `
                 <div class="opcao">
                     <img src="${respostasDoQuizz[aux1].image}" />
                     <p>${respostasDoQuizz[aux1].text}</p>
                 </div>
-            `
-        }
+            `;
     }
+  }
 
-    elemento1.innerHTML = elemento1.innerHTML + `
+  elemento1.innerHTML =
+    elemento1.innerHTML +
+    `
         <div class="nivelResultado">
             <div class="nivelDoQuizz">
                 <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
@@ -87,7 +112,7 @@ function tela2(){
             <button class="botaoReiniciar">Reiniciar Quizz</button>
             <button class="voltarHome">Voltar pra home</button>
         </div>
-    `
+    `;
 }
 
 function tela3pt1() {
@@ -306,23 +331,23 @@ function verificarInformacoes() {
 }
 
 function verificarNiveis() {
-    const inputTitulo = document.querySelector(".input1").value;
-    const qtdePerguntasInput = document.querySelector(".input3").value;
-    urlInput = document.querySelector(".input2").value;
-    const qtdeNiveisInput = document.querySelector(".input4").value;
-    const botao = document.querySelector(".botaoProsseguir");
-    if (
-      inputTitulo.length < 20 ||
-      inputTitulo.length > 65 ||
-      !checkURL(urlInput) ||
-      qtdePerguntasInput < 3 ||
-      qtdeNiveisInput < 2
-    ) {
-      alert("Insira as informações corretas");
-    } else {
-      tela3pt2();
-    }
+  const inputTitulo = document.querySelector(".input1").value;
+  const qtdePerguntasInput = document.querySelector(".input3").value;
+  urlInput = document.querySelector(".input2").value;
+  const qtdeNiveisInput = document.querySelector(".input4").value;
+  const botao = document.querySelector(".botaoProsseguir");
+  if (
+    inputTitulo.length < 20 ||
+    inputTitulo.length > 65 ||
+    !checkURL(urlInput) ||
+    qtdePerguntasInput < 3 ||
+    qtdeNiveisInput < 2
+  ) {
+    alert("Insira as informações corretas");
+  } else {
+    tela3pt2();
   }
+}
 
 function checkURL(urlInput) {
   const rule =
