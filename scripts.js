@@ -123,7 +123,7 @@ function tela3pt2() {
   limparBotao.innerHTML = "";
   const elemento = document.querySelector(".comecePeloComeco");
   elemento.innerHTML = `
-    <div class ="conteudoTela3pt2">
+    <div class ="conteudo">
     <div class="comecePeloComeco">
         Crie suas perguntas
     </div>
@@ -202,8 +202,8 @@ function tela3pt2() {
 }
 
 function tela3pt3() {
-  const elemento = document.querySelector(".conteudoTela3pt2");
-  elemento.innerHTML = `<div class="conteudoTela3pt3">
+  const elemento = document.querySelector(".conteudo");
+  elemento.innerHTML = `<div class="conteudo">
     <div class="comecePeloComeco">
         Agora, decida os níveis!
     </div>
@@ -244,15 +244,16 @@ function tela3pt3() {
     <button class="botaoProsseguir" onclick="tela3pt4(this)">
         Finalizar Quizz
     </button>
-    <
+    
     
     <br/><br/><br/><br/>
 </div>`;
 }
 
 function tela3pt4() {
-  const elemento = document.querySelector(".conteudoTela3pt3");
-  elemento.innerHTML = `<div class="conteudoTelapt4">
+  const elemento = document.querySelector(".conteudo");
+  elemento.innerHTML = `<div class="conteudo">
+  <div class ="centralizar">
     <div class="seuQuizzEstaPronto">
         Seu quizz está pronto!
     </div>
@@ -269,6 +270,7 @@ function tela3pt4() {
         </div>
        
     <br/><br/><br/><br/>
+    </div>
 </div>`;
 }
 let urlInput;
@@ -290,6 +292,25 @@ function verificarInformacoes() {
     tela3pt2();
   }
 }
+
+function verificarNiveis() {
+    const inputTitulo = document.querySelector(".input1").value;
+    const qtdePerguntasInput = document.querySelector(".input3").value;
+    urlInput = document.querySelector(".input2").value;
+    const qtdeNiveisInput = document.querySelector(".input4").value;
+    const botao = document.querySelector(".botaoProsseguir");
+    if (
+      inputTitulo.length < 20 ||
+      inputTitulo.length > 65 ||
+      !checkURL(urlInput) ||
+      qtdePerguntasInput < 3 ||
+      qtdeNiveisInput < 2
+    ) {
+      alert("Insira as informações corretas");
+    } else {
+      tela3pt2();
+    }
+  }
 
 function checkURL(urlInput) {
   const rule =
