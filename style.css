@@ -179,8 +179,10 @@ h2 {
 }
 
 .nomeQuizz img {
+  position: absolute;
   width: 100%;
   height: 142px;
+  z-index: -1;
 }
 
 .nomeQuizz h2 {
