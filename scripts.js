@@ -19,8 +19,8 @@ function aleatorizador() {
 }
 
 function carregarTodosQuizzes(resposta) {
-   dadosDoQuizz = resposta.data;
-   console.log(dadosDoQuizz)
+  dadosDoQuizz = resposta.data;
+  console.log(dadosDoQuizz);
 
   for (let i = 0; i < dadosDoQuizz.length; i++) {
     const todosQuizzes = document.querySelector(".todosQuizz");
@@ -78,22 +78,21 @@ function tela2(quizzClicado) {
     respostasDoQuizz = respostasDoQuizz.sort(aleatorizador);
 
     for (let aux1 = 0; aux1 < respostasDoQuizz.length; aux1++) {
-        if (respostasDoQuizz[aux1].isCorrectAnswer === true){
-            elemento3.innerHTML += `
+      if (respostasDoQuizz[aux1].isCorrectAnswer === true) {
+        elemento3.innerHTML += `
                 <div class="opcao" id="correta" onclick="respostaSelecionada(this)">
                     <img src="${respostasDoQuizz[aux1].image}" />
                     <p>${respostasDoQuizz[aux1].text}</p>
                 </div>
             `;
-        }
-        else{
-            elemento3.innerHTML += `
+      } else {
+        elemento3.innerHTML += `
                 <div class="opcao" id="errada" onclick="respostaSelecionada(this)">
                     <img src="${respostasDoQuizz[aux1].image}" />
                     <p>${respostasDoQuizz[aux1].text}</p>
                 </div>
             `;
-        }
+      }
     }
   }
 
@@ -116,38 +115,40 @@ function tela2(quizzClicado) {
         </div>
 
         <div class="botoes">
-            <button class="botaoReiniciar">Reiniciar Quizz</button>
-            <button class="voltarHome">Voltar pra home</button>
+            <button onclick="scrollar()" class="botaoReiniciar">Reiniciar Quizz</button>
+            <button class="voltarHome"><a href="index.html">Voltar pra home</a></button>
         </div>
     `;
 }
 
-function respostaSelecionada(respostaSelecionada){
-    let pai = respostaSelecionada.parentNode;
-    // let scroll = pai.scrollIntoView();
-    function scroll(){
-        pai.scrollIntoView(true);
-    }
-    setTimeout(scroll, 2000);
-
-    for(let i = 1; i < pai.childNodes.length; i = i + 2){
-        console.log(pai.childNodes[i]);
-        let filho = pai.childNodes[i];
-        if (filho.id === "correta"){
-            filho.classList.add("opcaoCerta");
-            filho.classList.add("opcaoNaoSelecionada");
-            filho.removeAttribute("onclick");
-        }
-        else{
-            filho.classList.add("opcaoErrada");
-            filho.classList.add("opcaoNaoSelecionada");
-            filho.removeAttribute("onclick");
-        }
-    }
-    respostaSelecionada.classList.remove('opcaoNaoSelecionada');
+function scrollar() {
+  const nomeDoQuizz = document.querySelector(".nomeQuizz");
+  nomeDoQuizz.scrollIntoView({ behavior: "smooth" });
 }
 
+function respostaSelecionada(respostaSelecionada) {
+  let pai = respostaSelecionada.parentNode;
+  // let scroll = pai.scrollIntoView();
+  function scroll() {
+    pai.scrollIntoView(true);
+  }
+  setTimeout(scroll, 2000);
 
+  for (let i = 1; i < pai.childNodes.length; i = i + 2) {
+    console.log(pai.childNodes[i]);
+    let filho = pai.childNodes[i];
+    if (filho.id === "correta") {
+      filho.classList.add("opcaoCerta");
+      filho.classList.add("opcaoNaoSelecionada");
+      filho.removeAttribute("onclick");
+    } else {
+      filho.classList.add("opcaoErrada");
+      filho.classList.add("opcaoNaoSelecionada");
+      filho.removeAttribute("onclick");
+    }
+  }
+  respostaSelecionada.classList.remove("opcaoNaoSelecionada");
+}
 
 function tela3pt1() {
   const elemento = document.querySelector(".conteudo");
@@ -173,7 +174,6 @@ function tela3pt1() {
     Prosseguir para criar perguntas
 </button>'
 </div>`;
-
 }
 
 function tela3pt2() {
@@ -193,11 +193,11 @@ function tela3pt2() {
     <div class="comecePeloComeco">
         Crie suas perguntas
     </div>
-    <div class="perguntas">`
-    
-    const elemento2 = document.querySelector(".perguntas");
+    <div class="perguntas">`;
 
-    for(i=0; i<qtdePerguntasInput; i++){
+  const elemento2 = document.querySelector(".perguntas");
+
+  for (i = 0; i < qtdePerguntasInput; i++) {
     elemento2.innerHTML += `
     <div class="perguntas">
         <div class="containerPerguntasAberto">
@@ -246,10 +246,9 @@ function tela3pt2() {
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" placeholder="URL da imagem 3">
             </div>
-        </div>`
-    }
-    elemento2.innerHTML +=
-       `
+        </div>`;
+  }
+  elemento2.innerHTML += `
     <div class ="divOculta">
     ${qtdeNiveisInput}
     </div>
@@ -273,16 +272,15 @@ function tela3pt3() {
     <div class="comecePeloComeco">
         Agora, decida os níveis!
     </div>
-    <div class="niveis">`
-    
-    const elemento2 = document.querySelector(".niveis");
+    <div class="niveis">`;
 
-    for(i=0; i<qtdeNiveisInput; i++){
-    elemento2.innerHTML +=
-    `<div class="niveis">
+  const elemento2 = document.querySelector(".niveis");
+
+  for (i = 0; i < qtdeNiveisInput; i++) {
+    elemento2.innerHTML += `<div class="niveis">
         <div class="containerNiveisAberto">
             <div class="nível1 titulos">
-                Nível ${i+1}
+                Nível ${i + 1}
             </div>
 
             <div class="tituloCriarQuizz caixaDeInputTela3">
@@ -297,10 +295,9 @@ function tela3pt3() {
             <div class="urlCriarQuizz caixaDeInputDescricao">
                 <input class = "input4" type="text" placeholder="Descrição do nível">
             </div>
-        </div>`
-    }
-        elemento2.innerHTML +=
-        `
+        </div>`;
+  }
+  elemento2.innerHTML += `
         <div class="containerNiveisFechado">
             <div class="pergunta2 titulos">
                 Nivel 2
@@ -369,51 +366,52 @@ function verificarInformacoes() {
   }
 }
 
-
 function verificarNiveis() {
-    const inputTitulo = document.querySelector(".input1").value;
-    const porcentagemInput = document.querySelector(".input2").value;
-    urlInput = document.querySelector(".input3").value;
-    const descricaoInput = document.querySelector(".input4").value;
-    const botao = document.querySelector(".botaoProsseguir");
-    if (
-      inputTitulo.length < 10 ||
-      !checkURL(urlInput) ||
-      porcentagemInput < 0 ||
-      porcentagemInput > 100 ||
-      descricaoInput.length < 30
-    ) {
-      alert("Insira as informações corretas");
-    } else {
-      tela3pt4();
-    }
+  const inputTitulo = document.querySelector(".input1").value;
+  const porcentagemInput = document.querySelector(".input2").value;
+  urlInput = document.querySelector(".input3").value;
+  const descricaoInput = document.querySelector(".input4").value;
+  const botao = document.querySelector(".botaoProsseguir");
+  if (
+    inputTitulo.length < 10 ||
+    !checkURL(urlInput) ||
+    porcentagemInput < 0 ||
+    porcentagemInput > 100 ||
+    descricaoInput.length < 30
+  ) {
+    alert("Insira as informações corretas");
+  } else {
+    tela3pt4();
   }
-
-function verificarInputs() {
-    let inputTitle = document.querySelector('.titulo-input').value;
-     let inputColor = document.querySelector('.hex'); 
-    let inputPergunta = document.querySelector('.input-text').value;
-    let urlInput = document.querySelector('.input-url').value;
-    let inputIncorreta = document.querySelector('.input-incorreta')
-    if(inputTitle.length <  20 || inputPergunta === "" || inputIncorreta === "" || !checkURL(urlInput) || !checkColor(inputColor))  {
-        alert('Insira as informações corretas!')
-    } else {
-        tela3pt3();
-    }
 }
 
+function verificarInputs() {
+  let inputTitle = document.querySelector(".titulo-input").value;
+  let inputColor = document.querySelector(".hex");
+  let inputPergunta = document.querySelector(".input-text").value;
+  let urlInput = document.querySelector(".input-url").value;
+  let inputIncorreta = document.querySelector(".input-incorreta");
+  if (
+    inputTitle.length < 20 ||
+    inputPergunta === "" ||
+    inputIncorreta === "" ||
+    !checkURL(urlInput) ||
+    !checkColor(inputColor)
+  ) {
+    alert("Insira as informações corretas!");
+  } else {
+    tela3pt3();
+  }
+}
 
 function checkURL(urlInput) {
-
   const rule =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
   return rule.test(urlInput);
 }
 
 function checkColor(inputColor) {
-    console.log(inputColor)
-    const rule = /^\#([0-9]|[A-F]|[a-f]){6}$/;
+  console.log(inputColor);
+  const rule = /^\#([0-9]|[A-F]|[a-f]){6}$/;
   return rule.test(inputColor);
 }
-
-
