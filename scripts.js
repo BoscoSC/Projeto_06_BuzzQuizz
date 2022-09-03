@@ -25,7 +25,7 @@ function carregarTodosQuizzes(resposta) {
   for (let i = 0; i < dadosDoQuizz.length; i++) {
     const todosQuizzes = document.querySelector(".todosQuizz");
     todosQuizzes.innerHTML += `<div class="quizzesCaixa">
-               <div onclick="tela2()">
+               <div onclick="tela2(this)" id="${i}">
                  <div class="quizzDisplay">
                    <img src="${dadosDoQuizz[i].image}"/>
                    <p>
@@ -37,9 +37,10 @@ function carregarTodosQuizzes(resposta) {
 
 carregarTodosQuizzes();
 
-function tela2() {
-  let i = 9; // valor pra teste, o certo é pegar o index do clicado, PROVAVEL de ser com THIS
-
+function tela2(quizzClicado) {
+  let i = quizzClicado.id;
+  console.log(i);
+  
   let elemento = document.querySelector(".conteudo");
   elemento.innerHTML = `
     <div class="nomeQuizz">
