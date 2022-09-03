@@ -39,8 +39,7 @@ carregarTodosQuizzes();
 
 function tela2(quizzClicado) {
   let i = quizzClicado.id;
-  console.log(i);
-  
+
   let elemento = document.querySelector(".conteudo");
   elemento.innerHTML = `
     <div class="nomeQuizz">
@@ -55,7 +54,6 @@ function tela2(quizzClicado) {
   let elemento1 = document.querySelector(".conteudoTela2");
 
   let perguntasDoQuizz = dadosDoQuizz[i].questions;
-  // console.log(perguntasDoQuizz);
 
   for (let aux = 0; aux < perguntasDoQuizz.length; aux++) {
     elemento1.innerHTML =
@@ -74,27 +72,35 @@ function tela2(quizzClicado) {
         </div>`;
 
     let elemento2 = document.querySelectorAll(".opcoesPergunta");
-    /* console.log(elemento2); */
     let elemento3 = elemento2[elemento2.length - 1];
-    /* console.log(elemento3); */
 
     let respostasDoQuizz = dadosDoQuizz[i].questions[aux].answers;
-    respostasDoQuizz.sort(aleatorizador);
+    respostasDoQuizz = respostasDoQuizz.sort(aleatorizador);
 
     for (let aux1 = 0; aux1 < respostasDoQuizz.length; aux1++) {
-      elemento3.innerHTML += `
-                <div class="opcao">
+        if (respostasDoQuizz[aux1].isCorrectAnswer === true){
+            elemento3.innerHTML += `
+                <div class="opcao" id="correta" onclick="respostaSelecionada(this)">
                     <img src="${respostasDoQuizz[aux1].image}" />
                     <p>${respostasDoQuizz[aux1].text}</p>
                 </div>
             `;
+        }
+        else{
+            elemento3.innerHTML += `
+                <div class="opcao" id="errada" onclick="respostaSelecionada(this)">
+                    <img src="${respostasDoQuizz[aux1].image}" />
+                    <p>${respostasDoQuizz[aux1].text}</p>
+                </div>
+            `;
+        }
     }
   }
 
   elemento1.innerHTML =
     elemento1.innerHTML +
     `
-        <div class="nivelResultado">
+        <div class="nivelResultado hidden">
             <div class="nivelDoQuizz">
                 <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
             </div>
@@ -115,6 +121,33 @@ function tela2(quizzClicado) {
         </div>
     `;
 }
+
+function respostaSelecionada(respostaSelecionada){
+    let pai = respostaSelecionada.parentNode;
+    // let scroll = pai.scrollIntoView();
+    function scroll(){
+        pai.scrollIntoView(true);
+    }
+    setTimeout(scroll, 2000);
+
+    for(let i = 1; i < pai.childNodes.length; i = i + 2){
+        console.log(pai.childNodes[i]);
+        let filho = pai.childNodes[i];
+        if (filho.id === "correta"){
+            filho.classList.add("opcaoCerta");
+            filho.classList.add("opcaoNaoSelecionada");
+            filho.removeAttribute("onclick");
+        }
+        else{
+            filho.classList.add("opcaoErrada");
+            filho.classList.add("opcaoNaoSelecionada");
+            filho.removeAttribute("onclick");
+        }
+    }
+    respostaSelecionada.classList.remove('opcaoNaoSelecionada');
+}
+
+
 
 function tela3pt1() {
   const elemento = document.querySelector(".conteudo");
