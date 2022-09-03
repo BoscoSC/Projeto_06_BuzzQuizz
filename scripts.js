@@ -185,6 +185,13 @@ function tela3pt1() {
 }
 
 function tela3pt2() {
+
+  const tituloCriarQuizz = document.querySelector(".input1").value
+  console.log(tituloCriarQuizz);
+
+  const urlCriarQuizz = document.querySelector(".input2").value
+  console.log(urlCriarQuizz);
+
   const qtdePerguntasInput = document.querySelector(".input3").value;
   console.log(qtdePerguntasInput);
 
@@ -257,7 +264,16 @@ function tela3pt2() {
         </div>`;
   }
   elemento2.innerHTML += `
-    <div class ="divOculta">
+    <div class ="divOculta1 hidden">
+    ${tituloCriarQuizz}
+    </div>
+    <div class ="divOculta2 hidden">
+    ${urlCriarQuizz}
+    </div>
+    <div class ="divOculta3 hidden">
+    ${qtdePerguntasInput}
+    </div>
+    <div class ="divOculta4 hidden">
     ${qtdeNiveisInput}
     </div>
 
@@ -272,7 +288,13 @@ function tela3pt2() {
 }
 
 function tela3pt3() {
-  const qtdeNiveisInput = document.querySelector(".divOculta").innerHTML;
+  const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
+  const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+  const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+  const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+
+  console.log(tituloCriarQuizz)
+  console.log(urlCriarQuizz);
 
   console.log(qtdeNiveisInput);
   const elemento = document.querySelector(".conteudo");
@@ -295,7 +317,7 @@ function tela3pt3() {
                 <input class ="input1" id=”placeholder-text” type="text" placeholder="Título do nível">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input class ="input2" type="text" placeholder="% de acerto mínima">
+                <input class ="input${2 + 4*i}" type="text" placeholder="% de acerto mínima">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input class ="input3"type="text" placeholder="URL da imagem do nível">
@@ -306,6 +328,21 @@ function tela3pt3() {
         </div>`;
   }
   elemento2.innerHTML += `
+
+        <div class ="divOculta1 hidden">
+        ${tituloCriarQuizz}
+        </div>
+        <div class ="divOculta2 hidden">
+        ${urlCriarQuizz}
+        </div>
+        <div class ="divOculta3 hidden">
+        ${qtdePerguntasInput}
+        </div>
+        <div class ="divOculta4 hidden">
+        ${qtdeNiveisInput}
+        </div>
+
+
         <div class="containerNiveisFechado">
             <div class="pergunta2 titulos">
                 Nivel 2
@@ -332,6 +369,11 @@ function tela3pt3() {
 }
 
 function tela3pt4() {
+    const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
+    const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+    const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+    const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+
   const elemento = document.querySelector(".conteudo");
   elemento.innerHTML = `<div class="conteudo">
   <div class ="centralizar">
@@ -339,6 +381,7 @@ function tela3pt4() {
         Seu quizz está pronto!
     </div>
     
+    <img src="${urlCriarQuizz}"/>
 
     <a href="">
     <div class="botaoAcessar">
@@ -375,22 +418,43 @@ function verificarInformacoes() {
 }
 
 function verificarNiveis() {
-  const inputTitulo = document.querySelector(".input1").value;
-  const porcentagemInput = document.querySelector(".input2").value;
-  urlInput = document.querySelector(".input3").value;
+    const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
+    const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+    const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+    const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+   
+    for (i = 0; i < qtdeNiveisInput; i++){
+        const inputTitulo = document.querySelector(".input1").value;
+        const porcentagemInput = document.querySelector(`.input${2 + 4*i}`).value;
+        console.log(porcentagemInput)
+        urlInput = document.querySelector(".input3").value;
   const descricaoInput = document.querySelector(".input4").value;
   const botao = document.querySelector(".botaoProsseguir");
+  let k = 0;
+
+  if( porcentagemInput == 0){
+    k++;
+  }
+
   if (
     inputTitulo.length < 10 ||
     !checkURL(urlInput) ||
     porcentagemInput < 0 ||
     porcentagemInput > 100 ||
-    descricaoInput.length < 30
-  ) {
+    descricaoInput.length < 30 ||
+    k < 1
+) {
     alert("Insira as informações corretas");
   } else {
+    recepcao();
     tela3pt4();
   }
+}
+
+  
+  
+  
+  
 }
 
 function verificarInputs() {
@@ -407,6 +471,7 @@ function verificarInputs() {
     !checkColor(inputColor)
   ) {
     alert("Insira as informações corretas!");
+    tela3pt3();
   } else {
     tela3pt3();
   }
@@ -423,3 +488,107 @@ function checkColor(inputColor) {
   const rule = /^\#([0-9]|[A-F]|[a-f]){6}$/;
   return rule.test(inputColor);
 }
+
+
+
+
+
+// java para postar quizz criado;
+
+
+function recepcao(){
+    const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
+    const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+    const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+    const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+    let dadosDoQuizzCriado = {
+        title: tituloCriarQuizz,
+        image: urlCriarQuizz,
+        questions: [
+            {
+                title: "Título da pergunta 1",
+                color: "#123456",
+                answers: [
+                    {
+                        text: "Texto da resposta 1",
+                        image: "https://http.cat/411.jpg",
+                        isCorrectAnswer: true
+                    },
+                    {
+                        text: "Texto da resposta 2",
+                        image: "https://http.cat/412.jpg",
+                        isCorrectAnswer: false
+                    }
+                ]
+            },
+            {
+                title: "Título da pergunta 2",
+                color: "#123456",
+                answers: [
+                    {
+                        text: "Texto da resposta 1",
+                        image: "https://http.cat/411.jpg",
+                        isCorrectAnswer: true
+                    },
+                    {
+                        text: "Texto da resposta 2",
+                        image: "https://http.cat/412.jpg",
+                        isCorrectAnswer: false
+                    }
+                ]
+            },
+            {
+                title: "Título da pergunta 3",
+                color: "#123456",
+                answers: [
+                    {
+                        text: "Texto da resposta 1",
+                        image: "https://http.cat/411.jpg",
+                        isCorrectAnswer: true
+                    },
+                    {
+                        text: "Texto da resposta 2",
+                        image: "https://http.cat/412.jpg",
+                        isCorrectAnswer: false
+                    }
+                ]
+            }
+        ],
+        levels: [
+            {
+                title: "Título do nível 1",
+                image: "https://http.cat/411.jpg",
+                text: "Descrição do nível 1",
+                minValue: 0
+            },
+            {
+                title: "Título do nível 2",
+                image: "https://http.cat/412.jpg",
+                text: "Descrição do nível 2",
+                minValue: 50
+            }
+        ]
+    }
+    
+    const requisicao = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', dadosDoQuizzCriado);
+    console.log(dadosDoQuizzCriado);
+    requisicao.then(pergarDados);
+    requisicao.catch(tratarError);
+
+    function tratarError(erro){
+        console.log(erro.response.status);
+        alert('Digite outro nome, esse já está em uso!')
+    }
+} 
+
+
+
+
+function pergarDados(){ 
+    
+
+    //const promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+   // promessa.then( dadosChegaram ); 
+    
+}
+
