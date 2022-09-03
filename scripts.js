@@ -123,7 +123,15 @@ function tela2(quizzClicado) {
 
 function scrollar() {
   const nomeDoQuizz = document.querySelector(".nomeQuizz");
-  nomeDoQuizz.scrollIntoView({ behavior: "smooth" });
+  nomeDoQuizz.scrollIntoView({ behavior: "smooth", block: "end" });
+  resetarRespostas();
+}
+
+function resetarRespostas() {
+  const opcao = document.querySelectorAll(".opcao");
+  opcao.forEach(function (element) {
+    element.classList.remove("opcaoNaoSelecionada", "opcaoCerta", "opcaoErrada");
+  });
 }
 
 function respostaSelecionada(respostaSelecionada) {
