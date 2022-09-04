@@ -144,15 +144,17 @@ function resetarRespostas() {
   const opcao = document.querySelectorAll(".opcao");
   opcao.forEach(function (element) {
     element.classList.remove("opcaoNaoSelecionada", "opcaoCerta", "opcaoErrada");
+    element.setAttribute("onclick","respostaSelecionada(this)");
   });
-  
+  let nivel = document.querySelector(".nivelResultado");
+  nivel.classList.add("hidden");
 }
 
 function respostaSelecionada(respostaSelecionada) {
+  let scrollaProxPergunta = respostaSelecionada.parentNode.parentNode.nextElementSibling;
   let pai = respostaSelecionada.parentNode;
-  // let scroll = pai.scrollIntoView();
   function scroll() {
-    pai.scrollIntoView(true);
+    scrollaProxPergunta.scrollIntoView(true);
   }
   setTimeout(scroll, 2000);
 
