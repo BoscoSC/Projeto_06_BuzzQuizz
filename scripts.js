@@ -435,16 +435,17 @@ function verificarInformacoes() {
   let urlInput = document.querySelector(".input2").value;
   const qtdeNiveisInput = document.querySelector(".input4").value;
   const botao = document.querySelector(".botaoProsseguir");
-  let error1 = false;
-  let error2 = false;
-  let error3 = false;
-  let error4 = false;
+  let error1;
+  let error2;
+  let error3;
+  let error4;
 
   if (inputTitulo.length < 20 || inputTitulo.length > 65) {
     document.querySelector(".erro1").classList.remove("hidden");
     error1 = false
     console.log(error1)
   } else {
+    document.querySelector(".erro1").classList.add("hidden");
     error1 = true;
   }
   if (!checkURL(urlInput)) {
@@ -452,6 +453,7 @@ function verificarInformacoes() {
     error2 = false
     console.log(error2)
   } else {
+    document.querySelector(".erro2").classList.add("hidden");
     error2 = true;
   }
   if (qtdePerguntasInput < 3) {
@@ -459,6 +461,7 @@ function verificarInformacoes() {
     error3 = false
     console.log(error3)
   } else {
+    document.querySelector(".erro3").classList.add("hidden");
     error3 = true;
   }
   if (qtdeNiveisInput < 2) {
@@ -466,6 +469,7 @@ function verificarInformacoes() {
     error4 = false
     console.log(error4)
   } else {
+    document.querySelector(".erro4").classList.add("hidden");
     error4 = true;
   }
   if((error1 && error2 && error3 && error4) === true){
