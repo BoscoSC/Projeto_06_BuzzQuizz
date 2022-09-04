@@ -1,5 +1,6 @@
 let quizzes;
 const isLoading = (state) => {
+  console.log(document.querySelector('.spinner'))
   if(state) document.querySelector('.spinner').classList.remove('hidden');
   else document.querySelector('.spinner').classList.add('hidden');
 }
@@ -10,7 +11,6 @@ function recebeQuizz() {
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
   );
   promessa.then(carregarTodosQuizzes);
-  
 }
 
 recebeQuizz();
@@ -23,7 +23,7 @@ recebeQuizz();
 } */
 
 function aleatorizador() {
-  isLoading(false)
+  
   return Math.random() - 0.5;
 }
 
@@ -48,7 +48,7 @@ function carregarTodosQuizzes(resposta) {
 carregarTodosQuizzes();
 
 function tela2(quizzClicado) {
-  isLoading(true);
+ 
   let i = quizzClicado.id;
 
   let elemento = document.querySelector(".conteudo");
@@ -130,14 +130,14 @@ function tela2(quizzClicado) {
             <button class="voltarHome"><a href="index.html">Voltar pra home</a></button>
         </div>
     `;
-    isLoading(false)
+    
 }
 
 function scrollar() {
   const nomeDoQuizz = document.querySelector(".nomeQuizz");
   nomeDoQuizz.scrollIntoView({ behavior: "smooth", block: "end" });
   resetarRespostas();
-  isLoading(false)
+  
 }
 
 function resetarRespostas() {
@@ -145,7 +145,7 @@ function resetarRespostas() {
   opcao.forEach(function (element) {
     element.classList.remove("opcaoNaoSelecionada", "opcaoCerta", "opcaoErrada");
   });
-  isLoading(false)
+  
 }
 
 function respostaSelecionada(respostaSelecionada) {
@@ -170,7 +170,7 @@ function respostaSelecionada(respostaSelecionada) {
     }
   }
   respostaSelecionada.classList.remove("opcaoNaoSelecionada");
-  isLoading(false)
+ 
 }
 
 function tela3pt1() {
@@ -197,7 +197,7 @@ function tela3pt1() {
     Prosseguir para criar perguntas
 </button>'
 </div>`;
-isLoading(false)
+
 }
 
 function tela3pt2() {
@@ -301,7 +301,7 @@ function tela3pt2() {
     
 </div>
 <br/><br/><br/><br/>`;
-isLoading(false)
+
 }
 
 function tela3pt3() {
@@ -383,7 +383,7 @@ dos
     
     <br/><br/><br/><br/>
 </div>`;
-isLoading(false)
+
 }
 
 function tela3pt4() {
@@ -414,7 +414,7 @@ function tela3pt4() {
     <br/><br/><br/><br/>
     </div>
 </div>`;
-isLoading(false)
+
 }
 
 function verificarInformacoes() {
@@ -434,11 +434,11 @@ function verificarInformacoes() {
   } else {
     tela3pt2();
   }
-  isLoading(false)
+
 }
 
 function verificarNiveis() {
-  isLoading(true)
+
     const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
     const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
     const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
@@ -470,7 +470,7 @@ function verificarNiveis() {
     recepcao();
     tela3pt4();
   }
-  isLoading(false)
+  
 }
 
   
@@ -497,18 +497,18 @@ function verificarInputs() {
   } else {
     tela3pt3();
   }
-  isLoading(false)
+  
 }
 
 function checkURL(urlInput) {
-  isLoading(false)
+  
   const rule =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
   return rule.test(urlInput);
 }
 
 function checkColor(inputColor) {
-  isLoading(false)
+ 
   console.log(inputColor);
   const rule = /^\#([0-9]|[A-F]|[a-f]){6}$/;
   return rule.test(inputColor);
@@ -604,14 +604,14 @@ function recepcao(){
         console.log(erro.response.status);
         alert('Digite outro nome, esse já está em uso!')
     }
-    isLoading(false)
+    
 } 
 
 
 
 
 function pegarDados(){ 
-  isLoading(false)
+  
 
     //const promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
    // promessa.then( dadosChegaram ); 
