@@ -1,4 +1,5 @@
 let quizzes;
+
 const isLoading = (state) => {
   console.log(document.querySelector('.spinner'))
   if(state) document.querySelector('.spinner').classList.remove('hidden');
@@ -312,10 +313,6 @@ function tela3pt3() {
   const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
   const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
 
-  console.log(tituloCriarQuizz)
-  console.log(urlCriarQuizz);
-
-  console.log(qtdeNiveisInput);
   const elemento = document.querySelector(".conteudo");
   elemento.innerHTML = `<div class="conteudo">
     <div class="comecePeloComeco">
@@ -325,24 +322,24 @@ function tela3pt3() {
 
   const elemento2 = document.querySelector(".niveis");
 
-  for (i = 0; i < qtdeNiveisInput; i++) {
+  for (contaNiveis = 0; contaNiveis < qtdeNiveisInput; contaNiveis++) {
     elemento2.innerHTML += `<div class="niveis">
         <div class="containerNiveisAberto">
             <div class="nível1 titulos">
-                Nível ${i + 1}
+                Nível ${contaNiveis + 1}
             </div>
 
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input class ="input1" id=”placeholder-text” type="text" placeholder="Título do nível">
+                <input class ="input${1 + 4*contaNiveis}" id=”placeholder-text” type="text" placeholder="Título do nível">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input class ="input${2 + 4*i}" type="text" placeholder="% de acerto mínima">
+                <input class ="input${2 + 4*contaNiveis}" type="text" placeholder="% de acerto mínima">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input class ="input3"type="text" placeholder="URL da imagem do nível">
+                <input class ="input${3 + 4*contaNiveis}"type="text" placeholder="URL da imagem do nível">
             </div>
             <div class="urlCriarQuizz caixaDeInputDescricao">
-                <input class = "input4" type="text" placeholder="Descrição do nível">
+                <input class = "input${4 + 4*contaNiveis}" type="text" placeholder="Descrição do nível">
             </div>
         </div>`;
   }
@@ -361,7 +358,7 @@ function tela3pt3() {
         ${qtdeNiveisInput}
         </div>
 
-dos
+
         <div class="containerNiveisFechado">
             <div class="pergunta2 titulos">
                 Nivel 2
@@ -440,46 +437,80 @@ function verificarInformacoes() {
 }
 
 function verificarNiveis() {
+    console.log('Verificando níveis, mas primeiro se as constantes ainda existem:');
 
     const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
-    const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
-    const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
-    const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
-   
-    for (i = 0; i < qtdeNiveisInput; i++){
-        const inputTitulo = document.querySelector(".input1").value;
-        const porcentagemInput = document.querySelector(`.input${2 + 4*i}`).value;
-        console.log(porcentagemInput)
-        urlInput = document.querySelector(".input3").value;
-  const descricaoInput = document.querySelector(".input4").value;
-  const botao = document.querySelector(".botaoProsseguir");
-  let k = 0;
+    console.log(tituloCriarQuizz);
 
-  if( porcentagemInput == 0){
-    k++;
-  }
+    const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+    console.log(urlCriarQuizz);
+
+    const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+    console.log(qtdePerguntasInput);
+
+    const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+    console.log(qtdeNiveisInput);
+
+    console.log('Vamos executar o contador.')
+    let contNiveis = 0;
+    let contPerguntas = 0;
+    contadorVerificarNiveis();
+
+    
+    function contadorVerificarNiveis(){
+
+        if(contNiveis == qtdeNiveisInput){
+            contNiveis = contNiveis - 1;
+        }
+
+        console.log('Agora, se os inputs dos níveis estão em ordem:');
+
+        const inputTituloNiveis = document.querySelector(`.input${1 + 4*contNiveis}`).value;
+        console.log(inputTituloNiveis);
+
+        const porcentagemInputNiveis = document.querySelector(`.input${2 + 4*contNiveis}`).value;
+        console.log(porcentagemInputNiveis);
+
+        urlInputNiveis = document.querySelector(`.input${3 + 4*contNiveis}`).value;
+        console.log(urlInputNiveis);
+
+        const descricaoInputNiveis = document.querySelector(`.input${4 + 4*contNiveis}`).value;
+        console.log(descricaoInputNiveis);
+
+        const botao = document.querySelector(".botaoProsseguir");
+
+        if(contPerguntas !== qtdePerguntasInput){
+            contPerguntas++;
+            console.log(`Valor do ContPerguntas: ${contPerguntas}`);
+        }
+        if(contNiveis !== qtdeNiveisInput){
+            contNiveis++;
+            console.log(`Valor do ContNíveis: ${contNiveis}`);
+        }
 
   if (
-    inputTitulo.length < 10 ||
-    !checkURL(urlInput) ||
-    porcentagemInput < 0 ||
-    porcentagemInput > 100 ||
-    descricaoInput.length < 30 ||
-    k < 1
+    inputTituloNiveis.length < 10 ||
+    !checkURL(urlInputNiveis) ||
+    porcentagemInputNiveis < 0 ||
+    porcentagemInputNiveis > 100 ||
+    descricaoInputNiveis.length < 30 /*||
+    k < 1*/
 ) {
     alert("Insira as informações corretas");
-  } else {
+    verificarNiveis();
+  } 
+  
+  if(contNiveis == qtdeNiveisInput && contPerguntas == qtdePerguntasInput){
+    console.log('tudo certo, QUIZZ CONCLUÍDO!')
     recepcao();
     tela3pt4();
-  }
-  
+  }else {
+     console.log('ainda não, repetindo a função:')
+     contadorVerificarNiveis();}
+    
+    }
 }
 
-  
-  
-  
-  
-}
 
 function verificarInputs() {
   let inputTitle = document.querySelector(".titulo-input").value;
@@ -528,6 +559,8 @@ function recepcao(){
     const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
     const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
     const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+
+    
     let dadosDoQuizzCriado = {
         title: tituloCriarQuizz,
         image: urlCriarQuizz,
