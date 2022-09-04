@@ -1,6 +1,11 @@
 let quizzes;
+const isLoading = (state) => {
+  if(state) document.querySelector('#spinner').classList.remove('hidden');
+  else document.querySelector('#spinner').classList.add('hidden');
+}
 
 function recebeQuizz() {
+  isLoading(true)
   let promessa = axios.get(
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
   );
@@ -8,6 +13,8 @@ function recebeQuizz() {
 }
 
 recebeQuizz();
+
+
 
 /* function processarResposta(resposta) {
   console.log(resposta.data);
@@ -33,11 +40,13 @@ function carregarTodosQuizzes(resposta) {
                    </p>
                  </div>`;
   }
+  isLoading(false)
 }
 
 carregarTodosQuizzes();
 
 function tela2(quizzClicado) {
+  isLoading(true);
   let i = quizzClicado.id;
 
   let elemento = document.querySelector(".conteudo");
@@ -342,7 +351,7 @@ function tela3pt3() {
         ${qtdeNiveisInput}
         </div>
 
-
+dos
         <div class="containerNiveisFechado">
             <div class="pergunta2 titulos">
                 Nivel 2
@@ -418,6 +427,7 @@ function verificarInformacoes() {
 }
 
 function verificarNiveis() {
+  isLoading(true)
     const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
     const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
     const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;

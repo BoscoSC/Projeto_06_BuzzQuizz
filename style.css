@@ -100,6 +100,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  position: relative;
 
 }
 .h2 {
@@ -563,4 +564,20 @@ input {
 
 .divOculta{
     display: none;
+}
+
+#spinner {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-top: 500px;
+
+  
+}
+
+.hidden {
+  display: none;
 }
