@@ -1,4 +1,5 @@
 let quizzes;
+let k = 0;
 
 const isLoading = (state) => {
   console.log(document.querySelector('.spinner'))
@@ -436,6 +437,7 @@ function verificarInformacoes() {
 
 }
 
+
 function verificarNiveis() {
     console.log('Verificando níveis, mas primeiro se as constantes ainda existem:');
 
@@ -452,13 +454,19 @@ function verificarNiveis() {
     console.log(qtdeNiveisInput);
 
     console.log('Vamos executar o contador.')
+    //Variáveis importantes antes de começar o contador
     let contNiveis = 0;
     let contPerguntas = 0;
+    
+    saveInputTituloNiveis = [];
+    savePorcentagemInputNiveis = [];
+    saveUrlInputNiveis = [];
+    saveDescricaoInputNiveis = [];
+
     contadorVerificarNiveis();
 
-    
     function contadorVerificarNiveis(){
-
+        console.log('contador sendo executado');
         if(contNiveis == qtdeNiveisInput){
             contNiveis = contNiveis - 1;
         }
@@ -468,14 +476,34 @@ function verificarNiveis() {
         const inputTituloNiveis = document.querySelector(`.input${1 + 4*contNiveis}`).value;
         console.log(inputTituloNiveis);
 
+        
+        console.log(saveInputTituloNiveis);
+        saveInputTituloNiveis.push(inputTituloNiveis);
+        console.log(saveInputTituloNiveis);
+
         const porcentagemInputNiveis = document.querySelector(`.input${2 + 4*contNiveis}`).value;
         console.log(porcentagemInputNiveis);
+        
+        
+        console.log(savePorcentagemInputNiveis);
+        savePorcentagemInputNiveis.push(porcentagemInputNiveis);
+        console.log(savePorcentagemInputNiveis);
 
         urlInputNiveis = document.querySelector(`.input${3 + 4*contNiveis}`).value;
         console.log(urlInputNiveis);
 
+       
+        console.log(saveUrlInputNiveis);
+        saveUrlInputNiveis.push(urlInputNiveis);
+        console.log(saveUrlInputNiveis);
+
         const descricaoInputNiveis = document.querySelector(`.input${4 + 4*contNiveis}`).value;
         console.log(descricaoInputNiveis);
+
+        
+        console.log(saveDescricaoInputNiveis);
+        saveDescricaoInputNiveis.push(descricaoInputNiveis);
+        console.log(saveDescricaoInputNiveis);
 
         const botao = document.querySelector(".botaoProsseguir");
 
@@ -488,19 +516,25 @@ function verificarNiveis() {
             console.log(`Valor do ContNíveis: ${contNiveis}`);
         }
 
+        if(porcentagemInputNiveis == '0'){
+            k++;
+        }
+
   if (
     inputTituloNiveis.length < 10 ||
     !checkURL(urlInputNiveis) ||
     porcentagemInputNiveis < 0 ||
     porcentagemInputNiveis > 100 ||
-    descricaoInputNiveis.length < 30 /*||
-    k < 1*/
+    descricaoInputNiveis.length < 30 
 ) {
     alert("Insira as informações corretas");
-    verificarNiveis();
-  } 
+  } else
   
-  if(contNiveis == qtdeNiveisInput && contPerguntas == qtdePerguntasInput){
+  if(k < 1){
+    alert("Insira as informações corretas");
+  } 
+  if(contNiveis == qtdeNiveisInput && contPerguntas == qtdePerguntasInput && k > 0){
+
     console.log('tudo certo, QUIZZ CONCLUÍDO!')
     recepcao();
     tela3pt4();
@@ -560,7 +594,7 @@ function recepcao(){
     const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
     const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
 
-    
+
     let dadosDoQuizzCriado = {
         title: tituloCriarQuizz,
         image: urlCriarQuizz,
@@ -616,19 +650,27 @@ function recepcao(){
         ],
         levels: [
             {
-                title: "Título do nível 1",
-                image: "https://http.cat/411.jpg",
-                text: "Descrição do nível 1",
+                title: saveInputTituloNiveis[0],
+                image: saveUrlInputNiveis[0],
+                text: saveDescricaoInputNiveis[0],
                 minValue: 0
             },
             {
-                title: "Título do nível 2",
-                image: "https://http.cat/412.jpg",
-                text: "Descrição do nível 2",
+                title: saveInputTituloNiveis[1],
+                image: saveUrlInputNiveis[1],
+                text: saveDescricaoInputNiveis[1],
                 minValue: 50
             }
         ]
     }
+for(dan = 2; dan < qtdeNiveisInput; dan++){
+    dadosDoQuizzCriado.levels.push({
+        title: saveInputTituloNiveis[dan],
+        image: saveUrlInputNiveis[dan],
+        text: saveDescricaoInputNiveis[dan],
+        minValue: 50
+    })
+}
     
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', dadosDoQuizzCriado);
     console.log(dadosDoQuizzCriado);
