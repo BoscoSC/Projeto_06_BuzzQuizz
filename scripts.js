@@ -557,31 +557,67 @@ function verificarPerguntas() {
 
     const inputTextoPerguntas = document.querySelector(`.inputP${1 + 10 * contPerguntas}`).value;
     console.log(inputTextoPerguntas);
-
     console.log(saveInputTextoPerguntas);
     saveInputTextoPerguntas.push(inputTextoPerguntas);
     console.log(saveInputTextoPerguntas);
 
     const inputCorPergunta = document.querySelector(`.inputP${2 + 10 * contPerguntas}`).value;
     console.log(inputCorPergunta);
-
     console.log(saveInputCorPergunta);
     saveInputCorPergunta.push(inputCorPergunta);
     console.log(saveInputCorPergunta);
 
     const inputRespostaCorreta = document.querySelector(`.inputP${3 + 10 * contPerguntas}`).value;
     console.log(inputRespostaCorreta);
-
     console.log(saveInputRespostaCorreta);
     saveInputRespostaCorreta.push(inputRespostaCorreta);
     console.log(saveInputRespostaCorreta);
 
     inputUrlRespostaCorreta = document.querySelector(`.inputP${4 + 10 * contPerguntas}`).value;
     console.log(inputUrlRespostaCorreta);
-
     console.log(saveInputUrlRespostaCorreta);
     saveInputUrlRespostaCorreta.push(inputUrlRespostaCorreta);
     console.log(saveInputUrlRespostaCorreta);
+
+    inputRespostaIncorreta1 = document.querySelector(`.inputP${5 + 10 * contPerguntas}`).value;
+    console.log(inputRespostaIncorreta1);
+    console.log(saveInputRespostaIncorreta1);
+    saveInputRespostaIncorreta1.push(inputRespostaIncorreta1);
+    console.log(saveInputRespostaIncorreta1);
+
+    inputUrlRespostaIncorreta1 = document.querySelector(`.inputP${6 + 10 * contPerguntas}`).value;
+    console.log(inputUrlRespostaIncorreta1);
+    console.log(saveInputUrlRespostaIncorreta1);
+    saveInputUrlRespostaIncorreta1.push(inputUrlRespostaIncorreta1);
+    console.log(saveInputUrlRespostaIncorreta1);
+
+    inputRespostaIncorreta2 = document.querySelector(`.inputP${7 + 10 * contPerguntas}`).value;
+    console.log(inputRespostaIncorreta2);
+    console.log(saveInputRespostaIncorreta2);
+    saveInputRespostaIncorreta2.push(inputRespostaIncorreta2);
+    console.log(saveInputRespostaIncorreta2);
+
+    inputUrlRespostaIncorreta2 = document.querySelector(`.inputP${8 + 10 * contPerguntas}`).value;
+    console.log(inputUrlRespostaIncorreta2);
+    console.log(saveInputUrlRespostaIncorreta2);
+    saveInputUrlRespostaIncorreta2.push(inputUrlRespostaIncorreta2);
+    console.log(saveInputUrlRespostaIncorreta2);
+
+
+    inputRespostaIncorreta3 = document.querySelector(`.inputP${9 + 10 * contPerguntas}`).value;
+    console.log(inputRespostaIncorreta3);
+    console.log(saveInputRespostaIncorreta3);
+    saveInputRespostaIncorreta3.push(inputRespostaIncorreta3);
+    console.log(saveInputRespostaIncorreta3);
+
+    inputUrlRespostaIncorreta3 = document.querySelector(`.inputP${10 + 10 * contPerguntas}`).value;
+    console.log(inputUrlRespostaIncorreta3);
+    console.log(saveInputUrlRespostaIncorreta3);
+    saveInputUrlRespostaIncorreta3.push(inputUrlRespostaIncorreta3);
+    console.log(saveInputUrlRespostaIncorreta3);
+
+
+
 
     const botao = document.querySelector(".botaoProsseguir");
 
@@ -589,10 +625,7 @@ function verificarPerguntas() {
       contPerguntas++;
       console.log(`Valor do ContPerguntas: ${contPerguntas}`);
     }
-    if (contNiveis !== qtdeNiveisInput) {
-      contNiveis++;
-      console.log(`Valor do ContNíveis: ${contNiveis}`);
-    }
+  
 
     if (
       inputTextoPerguntas.length < 20 ||
@@ -601,7 +634,6 @@ function verificarPerguntas() {
     ) {
       alert("Insira as informações corretas");
     } else if (
-      contNiveis == qtdeNiveisInput &&
       contPerguntas == qtdePerguntasInput 
     ) {
       console.log("tudo certo, QUIZZ CONCLUÍDO!");
@@ -751,49 +783,49 @@ function recepcao() {
     image: urlCriarQuizz,
     questions: [
       {
-        title: saveInputTextoPerguntas[0],
-        color: saveInputCorPergunta[0],
+        title: 'saveInputTextoPerguntas[0]',
+        color: 'saveInputCorPergunta[0]',
         answers: [
           {
-            text: saveInputRespostaCorreta[0],
-            image: saveInputUrlRespostaCorreta[0],
+            text: "saveInputRespostaCorreta[0]",
+            image: 'saveInputUrlRespostaCorreta[0]',
             isCorrectAnswer: true,
           },
           {
-            text: saveInputRespostaIncorreta1[0],
-            image: saveInputUrlRespostaIncorreta1[0],
+            text: "saveInputRespostaIncorreta1[0]",
+            image: 'saveInputUrlRespostaIncorreta1[0]',
             isCorrectAnswer: false,
           },
         ],
       },
       {
-        title: saveInputTextoPerguntas[1],
-        color: saveInputCorPergunta[1],
+        title: "saveInputTextoPerguntas[1]",
+        color: "saveInputCorPergunta[1]",
         answers: [
           {
-            text: saveInputRespostaCorreta[1],
-            image: saveInputUrlRespostaCorreta[1],
+            text: "saveInputRespostaCorreta[1]",
+            image: 'saveInputUrlRespostaCorreta[1]',
             isCorrectAnswer: true,
           },
           {
-            text: saveInputRespostaIncorreta1[1],
-            image: saveInputUrlRespostaIncorreta1[1],
+            text: 'saveInputRespostaIncorreta1[1]',
+            image: 'saveInputUrlRespostaIncorreta1[1]',
             isCorrectAnswer: false,
           },
         ],
       },
       {
-        title: saveInputTextoPerguntas[2],
-        color: saveInputCorPergunta[2],
+        title: "saveInputTextoPerguntas[2]",
+        color: "saveInputCorPergunta[2]",
         answers: [
           {
-            text: saveInputRespostaCorreta[2],
-            image: saveInputUrlRespostaCorreta[2],
+            text: "saveInputRespostaCorreta[2]",
+            image: 'saveInputUrlRespostaCorreta[2]',
             isCorrectAnswer: true,
           },
           {
-            text: saveInputRespostaIncorreta1[2],
-            image: saveInputUrlRespostaIncorreta1[2],
+            text: "saveInputRespostaIncorreta1"[2],
+            image: 'saveInputUrlRespostaIncorreta1[2]',
             isCorrectAnswer: false,
           },
         ],
@@ -801,15 +833,15 @@ function recepcao() {
     ],
     levels: [
       {
-        title: saveInputTituloNiveis[0],
-        image: saveUrlInputNiveis[0],
-        text: saveDescricaoInputNiveis[0],
+        title: 'saveInputTituloNiveis[0]',
+        image: 'saveUrlInputNiveis[0]',
+        text: 'saveDescricaoInputNiveis[0]',
         minValue: 0,
       },
       {
-        title: saveInputTituloNiveis[1],
-        image: saveUrlInputNiveis[1],
-        text: saveDescricaoInputNiveis[1],
+        title: 'saveInputTituloNiveis[1]',
+        image: 'saveUrlInputNiveis[1]',
+        text: 'saveDescricaoInputNiveis[1]',
         minValue: 50,
       },
     ],
@@ -847,16 +879,16 @@ function recepcao() {
     dadosDoQuizzCriado
   );
   console.log(dadosDoQuizzCriado);
-  requisicao.then(pegarDados);
+  requisicao.then(recebeQuizz);
   requisicao.catch(tratarError);
 
   function tratarError(erro) {
     console.log(erro.response.status);
-    alert("Digite outro nome, esse já está em uso!");
+    alert("Deu erro");
   }
 }
 
-function pegarDados() {
+//function deuCerto() {
   //const promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
   // promessa.then( dadosChegaram );
-}
+//}
