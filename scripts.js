@@ -262,7 +262,7 @@ function tela3pt2() {
   const qtdeNiveisInput = document.querySelector(".input4").value;
 
   const limparDiv = document.querySelector(".informacoesBasicas");
-  limparDiv.innerHTML = "";
+  limparDiv.classList.add("hidden");
   const limparBotao = document.querySelector(".botao");
   limparBotao.innerHTML = "";
   const elemento = document.querySelector(".comecePeloComeco");
