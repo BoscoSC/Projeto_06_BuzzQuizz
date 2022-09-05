@@ -2,13 +2,13 @@ let quizzes;
 let k = 0;
 
 const isLoading = (state) => {
-  console.log(document.querySelector('.spinner'))
-  if(state) document.querySelector('.spinner').classList.remove('hidden');
-  else document.querySelector('.spinner').classList.add('hidden');
-}
+  console.log(document.querySelector(".spinner"));
+  if (state) document.querySelector(".spinner").classList.remove("hidden");
+  else document.querySelector(".spinner").classList.add("hidden");
+};
 
 function recebeQuizz() {
-  isLoading(true)
+  isLoading(true);
   let promessa = axios.get(
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
   );
@@ -17,15 +17,12 @@ function recebeQuizz() {
 
 recebeQuizz();
 
-
-
 /* function processarResposta(resposta) {
   console.log(resposta.data);
   dadosDoQuizz = resposta.data;
 } */
 
 function aleatorizador() {
-  
   return Math.random() - 0.5;
 }
 
@@ -44,13 +41,12 @@ function carregarTodosQuizzes(resposta) {
                    </p>
                  </div>`;
   }
-  isLoading(false)
+  isLoading(false);
 }
 
 carregarTodosQuizzes();
 
 function tela2(quizzClicado) {
- 
   let i = quizzClicado.id;
 
   let elemento = document.querySelector(".conteudo");
@@ -132,28 +128,31 @@ function tela2(quizzClicado) {
             <button class="voltarHome"><a href="index.html">Voltar pra home</a></button>
         </div>
     `;
-    
 }
 
 function scrollar() {
   const nomeDoQuizz = document.querySelector(".nomeQuizz");
   nomeDoQuizz.scrollIntoView({ behavior: "smooth", block: "end" });
   resetarRespostas();
-  
 }
 
 function resetarRespostas() {
   const opcao = document.querySelectorAll(".opcao");
   opcao.forEach(function (element) {
-    element.classList.remove("opcaoNaoSelecionada", "opcaoCerta", "opcaoErrada");
-    element.setAttribute("onclick","respostaSelecionada(this)");
+    element.classList.remove(
+      "opcaoNaoSelecionada",
+      "opcaoCerta",
+      "opcaoErrada"
+    );
+    element.setAttribute("onclick", "respostaSelecionada(this)");
   });
   let nivel = document.querySelector(".nivelResultado");
   nivel.classList.add("hidden");
 }
 
 function respostaSelecionada(respostaSelecionada) {
-  let scrollaProxPergunta = respostaSelecionada.parentNode.parentNode.nextElementSibling;
+  let scrollaProxPergunta =
+    respostaSelecionada.parentNode.parentNode.nextElementSibling;
   let pai = respostaSelecionada.parentNode;
   function scroll() {
     scrollaProxPergunta.scrollIntoView(true);
@@ -174,7 +173,6 @@ function respostaSelecionada(respostaSelecionada) {
     }
   }
   respostaSelecionada.classList.remove("opcaoNaoSelecionada");
- 
 }
 
 function tela3pt1() {
@@ -184,16 +182,28 @@ function tela3pt1() {
 </div>
 <div class="informacoesBasicas">
     <div class="tituloCriarQuizz caixaDeInputTela3">
-        <input class="input1" id=”placeholder-text” type="text" placeholder="Título do seu quizz">
+        <input class="input1" id=”placeholder-text” type="text" placeholder="Título do seu quizz" required minlength="20" maxlength="65">
+    </div>
+    <div class="erro1 hidden">
+    <p class="erro-input1">Insira entre 20 e 65 caracateres!</p>
     </div>
     <div class="urlCriarQuizz caixaDeInputTela3">
-        <input class="input2" type="url" placeholder="URL da imagem do seu quizz">
+        <input class="input2" type="url" placeholder="URL da imagem do seu quizz" required>
+    </div>
+    <div class="erro2 hidden">
+    <p class="erro-input2">Insira uma URL válida!</p>
     </div>
     <div class="qtdePerguntasCriarQuizz caixaDeInputTela3">
-        <input class="input3" type="text" placeholder="Quantidade de perguntas do quizz">
+        <input class="input3" type="text" placeholder="Quantidade de perguntas do quizz" required>
+    </div>
+    <div class="erro3 hidden">
+    <p class="erro-input3">Insira pelo menos 3 perguntas ao seu quizz!</p>
     </div>
     <div class="qtdeNiveisCriarQuizz caixaDeInputTela3">
-        <input class="input4" type="text" placeholder="Quantidade de níveis do quiz">
+        <input class="input4" type="text" placeholder="Quantidade de níveis do quiz" required>
+    </div>
+    <div class="erro4 hidden">
+    <p class="erro-input4">Insira pelo menos 2 níveis ao seu quizz!</p>
     </div>
 </div>
 <div class="botao">
@@ -201,22 +211,16 @@ function tela3pt1() {
     Prosseguir para criar perguntas
 </button>'
 </div>`;
-
 }
 
 function tela3pt2() {
+  const tituloCriarQuizz = document.querySelector(".input1").value;
 
-  const tituloCriarQuizz = document.querySelector(".input1").value
-  console.log(tituloCriarQuizz);
-
-  const urlCriarQuizz = document.querySelector(".input2").value
-  console.log(urlCriarQuizz);
+  const urlCriarQuizz = document.querySelector(".input2").value;
 
   const qtdePerguntasInput = document.querySelector(".input3").value;
-  console.log(qtdePerguntasInput);
 
   const qtdeNiveisInput = document.querySelector(".input4").value;
-  console.log(qtdeNiveisInput);
 
   const limparDiv = document.querySelector(".informacoesBasicas");
   limparDiv.innerHTML = "";
@@ -305,7 +309,6 @@ function tela3pt2() {
     
 </div>
 <br/><br/><br/><br/>`;
-
 }
 
 function tela3pt3() {
@@ -331,16 +334,24 @@ function tela3pt3() {
             </div>
 
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input class ="input${1 + 4*contaNiveis}" id=”placeholder-text” type="text" placeholder="Título do nível">
+                <input class ="input${
+                  1 + 4 * contaNiveis
+                }" id=”placeholder-text” type="text" placeholder="Título do nível">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input class ="input${2 + 4*contaNiveis}" type="text" placeholder="% de acerto mínima">
+                <input class ="input${
+                  2 + 4 * contaNiveis
+                }" type="text" placeholder="% de acerto mínima">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input class ="input${3 + 4*contaNiveis}"type="text" placeholder="URL da imagem do nível">
+                <input class ="input${
+                  3 + 4 * contaNiveis
+                }"type="text" placeholder="URL da imagem do nível">
             </div>
             <div class="urlCriarQuizz caixaDeInputDescricao">
-                <input class = "input${4 + 4*contaNiveis}" type="text" placeholder="Descrição do nível">
+                <input class = "input${
+                  4 + 4 * contaNiveis
+                }" type="text" placeholder="Descrição do nível">
             </div>
         </div>`;
   }
@@ -383,14 +394,13 @@ function tela3pt3() {
     
     <br/><br/><br/><br/>
 </div>`;
-
 }
 
 function tela3pt4() {
-    const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
-    const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
-    const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
-    const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+  const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
+  const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+  const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+  const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
 
   const elemento = document.querySelector(".conteudo");
   elemento.innerHTML = `<div class="conteudo">
@@ -414,7 +424,6 @@ function tela3pt4() {
     <br/><br/><br/><br/>
     </div>
 </div>`;
-
 }
 
 function verificarInformacoes() {
@@ -423,157 +432,159 @@ function verificarInformacoes() {
   let urlInput = document.querySelector(".input2").value;
   const qtdeNiveisInput = document.querySelector(".input4").value;
   const botao = document.querySelector(".botaoProsseguir");
-
-  let error1 = false;
-  let error2 = false;
-  let error3 = false;
-  let error4 = false;
+  let error1;
+  let error2;
+  let error3;
+  let error4;
 
   if (inputTitulo.length < 20 || inputTitulo.length > 65) {
     document.querySelector(".erro1").classList.remove("hidden");
-    error1 = false
-    console.log(error1)
+    error1 = false;
   } else {
+    document.querySelector(".erro1").classList.add("hidden");
     error1 = true;
   }
   if (!checkURL(urlInput)) {
     document.querySelector(".erro2").classList.remove("hidden");
-    error2 = false
-    console.log(error2)
+    error2 = false;
   } else {
+    document.querySelector(".erro2").classList.add("hidden");
     error2 = true;
   }
   if (qtdePerguntasInput < 3) {
     document.querySelector(".erro3").classList.remove("hidden");
-    error3 = false
-    console.log(error3)
+    error3 = false;
   } else {
+    document.querySelector(".erro3").classList.add("hidden");
     error3 = true;
   }
   if (qtdeNiveisInput < 2) {
     document.querySelector(".erro4").classList.remove("hidden");
-    error4 = false
-    console.log(error4)
+    error4 = false;
   } else {
+    document.querySelector(".erro4").classList.add("hidden");
     error4 = true;
   }
-  if((error1 && error2 && error3 && error4) === true){
+  if ((error1 && error2 && error3 && error4) === true) {
     tela3pt2();
   } else {
-    alert('Digite os campos válidos!')
+    alert("Digite os campos válidos!");
   }
-
 }
-
 
 function verificarNiveis() {
-    console.log('Verificando níveis, mas primeiro se as constantes ainda existem:');
+  console.log(
+    "Verificando níveis, mas primeiro se as constantes ainda existem:"
+  );
 
-    const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
-    console.log(tituloCriarQuizz);
+  const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
+  console.log(tituloCriarQuizz);
 
-    const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
-    console.log(urlCriarQuizz);
+  const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+  console.log(urlCriarQuizz);
 
-    const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
-    console.log(qtdePerguntasInput);
+  const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+  console.log(qtdePerguntasInput);
 
-    const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
-    console.log(qtdeNiveisInput);
+  const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+  console.log(qtdeNiveisInput);
 
-    console.log('Vamos executar o contador.')
-    //Variáveis importantes antes de começar o contador
-    let contNiveis = 0;
-    let contPerguntas = 0;
-    
-    saveInputTituloNiveis = [];
-    savePorcentagemInputNiveis = [];
-    saveUrlInputNiveis = [];
-    saveDescricaoInputNiveis = [];
+  console.log("Vamos executar o contador.");
+  //Variáveis importantes antes de começar o contador
+  let contNiveis = 0;
+  let contPerguntas = 0;
 
-    contadorVerificarNiveis();
+  saveInputTituloNiveis = [];
+  savePorcentagemInputNiveis = [];
+  saveUrlInputNiveis = [];
+  saveDescricaoInputNiveis = [];
 
-    function contadorVerificarNiveis(){
-        console.log('contador sendo executado');
-        if(contNiveis == qtdeNiveisInput){
-            contNiveis = contNiveis - 1;
-        }
+  contadorVerificarNiveis();
 
-        console.log('Agora, se os inputs dos níveis estão em ordem:');
-
-        const inputTituloNiveis = document.querySelector(`.input${1 + 4*contNiveis}`).value;
-        console.log(inputTituloNiveis);
-
-        
-        console.log(saveInputTituloNiveis);
-        saveInputTituloNiveis.push(inputTituloNiveis);
-        console.log(saveInputTituloNiveis);
-
-        const porcentagemInputNiveis = document.querySelector(`.input${2 + 4*contNiveis}`).value;
-        console.log(porcentagemInputNiveis);
-        
-        
-        console.log(savePorcentagemInputNiveis);
-        savePorcentagemInputNiveis.push(porcentagemInputNiveis);
-        console.log(savePorcentagemInputNiveis);
-
-        urlInputNiveis = document.querySelector(`.input${3 + 4*contNiveis}`).value;
-        console.log(urlInputNiveis);
-
-       
-        console.log(saveUrlInputNiveis);
-        saveUrlInputNiveis.push(urlInputNiveis);
-        console.log(saveUrlInputNiveis);
-
-        const descricaoInputNiveis = document.querySelector(`.input${4 + 4*contNiveis}`).value;
-        console.log(descricaoInputNiveis);
-
-        
-        console.log(saveDescricaoInputNiveis);
-        saveDescricaoInputNiveis.push(descricaoInputNiveis);
-        console.log(saveDescricaoInputNiveis);
-
-        const botao = document.querySelector(".botaoProsseguir");
-
-        if(contPerguntas !== qtdePerguntasInput){
-            contPerguntas++;
-            console.log(`Valor do ContPerguntas: ${contPerguntas}`);
-        }
-        if(contNiveis !== qtdeNiveisInput){
-            contNiveis++;
-            console.log(`Valor do ContNíveis: ${contNiveis}`);
-        }
-
-        if(porcentagemInputNiveis == '0'){
-            k++;
-        }
-
-  if (
-    inputTituloNiveis.length < 10 ||
-    !checkURL(urlInputNiveis) ||
-    porcentagemInputNiveis < 0 ||
-    porcentagemInputNiveis > 100 ||
-    descricaoInputNiveis.length < 30 
-) {
-    alert("Insira as informações corretas");
-  } else
-
-  if (contNiveis == qtdeNiveisInput && k < 1){
-    alert('Insira as informações corretas');
-    tela3pt3();
-  }else
-  if(contNiveis == qtdeNiveisInput && contPerguntas == qtdePerguntasInput && k > 0){
-
-    console.log('tudo certo, QUIZZ CONCLUÍDO!')
-    recepcao();
-    tela3pt4();
-  } else {
-     console.log('ainda não, repetindo a função:')
-     contadorVerificarNiveis();}
-    
+  function contadorVerificarNiveis() {
+    console.log("contador sendo executado");
+    if (contNiveis == qtdeNiveisInput) {
+      contNiveis = contNiveis - 1;
     }
-}
 
+    console.log("Agora, se os inputs dos níveis estão em ordem:");
+
+    const inputTituloNiveis = document.querySelector(
+      `.input${1 + 4 * contNiveis}`
+    ).value;
+    console.log(inputTituloNiveis);
+
+    console.log(saveInputTituloNiveis);
+    saveInputTituloNiveis.push(inputTituloNiveis);
+    console.log(saveInputTituloNiveis);
+
+    const porcentagemInputNiveis = document.querySelector(
+      `.input${2 + 4 * contNiveis}`
+    ).value;
+    console.log(porcentagemInputNiveis);
+
+    console.log(savePorcentagemInputNiveis);
+    savePorcentagemInputNiveis.push(porcentagemInputNiveis);
+    console.log(savePorcentagemInputNiveis);
+
+    urlInputNiveis = document.querySelector(
+      `.input${3 + 4 * contNiveis}`
+    ).value;
+    console.log(urlInputNiveis);
+
+    console.log(saveUrlInputNiveis);
+    saveUrlInputNiveis.push(urlInputNiveis);
+    console.log(saveUrlInputNiveis);
+
+    const descricaoInputNiveis = document.querySelector(
+      `.input${4 + 4 * contNiveis}`
+    ).value;
+    console.log(descricaoInputNiveis);
+
+    console.log(saveDescricaoInputNiveis);
+    saveDescricaoInputNiveis.push(descricaoInputNiveis);
+    console.log(saveDescricaoInputNiveis);
+
+    const botao = document.querySelector(".botaoProsseguir");
+
+    if (contPerguntas !== qtdePerguntasInput) {
+      contPerguntas++;
+      console.log(`Valor do ContPerguntas: ${contPerguntas}`);
+    }
+    if (contNiveis !== qtdeNiveisInput) {
+      contNiveis++;
+      console.log(`Valor do ContNíveis: ${contNiveis}`);
+    }
+
+    if (porcentagemInputNiveis == "0") {
+      k++;
+    }
+
+    if (
+      inputTituloNiveis.length < 10 ||
+      !checkURL(urlInputNiveis) ||
+      porcentagemInputNiveis < 0 ||
+      porcentagemInputNiveis > 100 ||
+      descricaoInputNiveis.length < 30
+    ) {
+      alert("Insira as informações corretas");
+    } else if (contNiveis == qtdeNiveisInput && k < 1) {
+      alert("Insira as informações corretas");
+      tela3pt3();
+    } else if (
+      contNiveis == qtdeNiveisInput &&
+      contPerguntas == qtdePerguntasInput &&
+      k > 0
+    ) {
+      console.log("tudo certo, QUIZZ CONCLUÍDO!");
+      recepcao();
+      tela3pt4();
+    } else {
+      console.log("ainda não, repetindo a função:");
+      contadorVerificarNiveis();
+    }
+  }
+}
 
 function verificarInputs() {
   let inputTitle = document.querySelector(".titulo-input").value;
@@ -593,134 +604,119 @@ function verificarInputs() {
   } else {
     tela3pt3();
   }
-  
 }
 
 function checkURL(urlInput) {
-  
   const rule =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
   return rule.test(urlInput);
 }
 
 function checkColor(inputColor) {
- 
-  console.log(inputColor);
   const rule = /^\#([0-9]|[A-F]|[a-f]){6}$/;
   return rule.test(inputColor);
 }
 
-
-
-
-
 // java para postar quizz criado;
 
+function recepcao() {
+  const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
+  const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+  const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+  const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
 
-function recepcao(){
-    const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
-    const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
-    const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
-    const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
-
-
-    let dadosDoQuizzCriado = {
-        title: tituloCriarQuizz,
-        image: urlCriarQuizz,
-        questions: [
-            {
-                title: "Título da pergunta 1",
-                color: "#123456",
-                answers: [
-                    {
-                        text: "Texto da resposta 1",
-                        image: "https://http.cat/411.jpg",
-                        isCorrectAnswer: true
-                    },
-                    {
-                        text: "Texto da resposta 2",
-                        image: "https://http.cat/412.jpg",
-                        isCorrectAnswer: false
-                    }
-                ]
-            },
-            {
-                title: "Título da pergunta 2",
-                color: "#123456",
-                answers: [
-                    {
-                        text: "Texto da resposta 1",
-                        image: "https://http.cat/411.jpg",
-                        isCorrectAnswer: true
-                    },
-                    {
-                        text: "Texto da resposta 2",
-                        image: "https://http.cat/412.jpg",
-                        isCorrectAnswer: false
-                    }
-                ]
-            },
-            {
-                title: "Título da pergunta 3",
-                color: "#123456",
-                answers: [
-                    {
-                        text: "Texto da resposta 1",
-                        image: "https://http.cat/411.jpg",
-                        isCorrectAnswer: true
-                    },
-                    {
-                        text: "Texto da resposta 2",
-                        image: "https://http.cat/412.jpg",
-                        isCorrectAnswer: false
-                    }
-                ]
-            }
+  let dadosDoQuizzCriado = {
+    title: tituloCriarQuizz,
+    image: urlCriarQuizz,
+    questions: [
+      {
+        title: "Título da pergunta 1",
+        color: "#123456",
+        answers: [
+          {
+            text: "Texto da resposta 1",
+            image: "https://http.cat/411.jpg",
+            isCorrectAnswer: true,
+          },
+          {
+            text: "Texto da resposta 2",
+            image: "https://http.cat/412.jpg",
+            isCorrectAnswer: false,
+          },
         ],
-        levels: [
-            {
-                title: saveInputTituloNiveis[0],
-                image: saveUrlInputNiveis[0],
-                text: saveDescricaoInputNiveis[0],
-                minValue: 0
-            },
-            {
-                title: saveInputTituloNiveis[1],
-                image: saveUrlInputNiveis[1],
-                text: saveDescricaoInputNiveis[1],
-                minValue: 50
-            }
-        ]
-    }
-for(dan = 2; dan < qtdeNiveisInput; dan++){
+      },
+      {
+        title: "Título da pergunta 2",
+        color: "#123456",
+        answers: [
+          {
+            text: "Texto da resposta 1",
+            image: "https://http.cat/411.jpg",
+            isCorrectAnswer: true,
+          },
+          {
+            text: "Texto da resposta 2",
+            image: "https://http.cat/412.jpg",
+            isCorrectAnswer: false,
+          },
+        ],
+      },
+      {
+        title: "Título da pergunta 3",
+        color: "#123456",
+        answers: [
+          {
+            text: "Texto da resposta 1",
+            image: "https://http.cat/411.jpg",
+            isCorrectAnswer: true,
+          },
+          {
+            text: "Texto da resposta 2",
+            image: "https://http.cat/412.jpg",
+            isCorrectAnswer: false,
+          },
+        ],
+      },
+    ],
+    levels: [
+      {
+        title: saveInputTituloNiveis[0],
+        image: saveUrlInputNiveis[0],
+        text: saveDescricaoInputNiveis[0],
+        minValue: 0,
+      },
+      {
+        title: saveInputTituloNiveis[1],
+        image: saveUrlInputNiveis[1],
+        text: saveDescricaoInputNiveis[1],
+        minValue: 50,
+      },
+    ],
+  };
+  for (dan = 2; dan < qtdeNiveisInput; dan++) {
     dadosDoQuizzCriado.levels.push({
-        title: saveInputTituloNiveis[dan],
-        image: saveUrlInputNiveis[dan],
-        text: saveDescricaoInputNiveis[dan],
-        minValue: 50
-    })
-}
-    
-    const requisicao = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', dadosDoQuizzCriado);
-    console.log(dadosDoQuizzCriado);
-    requisicao.then(pegarDados);
-    requisicao.catch(tratarError);
+      title: saveInputTituloNiveis[dan],
+      image: saveUrlInputNiveis[dan],
+      text: saveDescricaoInputNiveis[dan],
+      minValue: 50,
+    });
+  }
 
-    function tratarError(erro){
-        console.log(erro.response.status);
-        alert('Digite outro nome, esse já está em uso!')
-    }
-    
-} 
+  const requisicao = axios.post(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+    dadosDoQuizzCriado
+  );
+  console.log(dadosDoQuizzCriado);
+  requisicao.then(pegarDados);
+  requisicao.catch(tratarError);
 
-
-
-
-function pegarDados(){ 
-  
-
-    //const promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
-   // promessa.then( dadosChegaram ); 
-    
+  function tratarError(erro) {
+    console.log(erro.response.status);
+    alert("Digite outro nome, esse já está em uso!");
+  }
 }
 
+function pegarDados() {
+  //const promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+  // promessa.then( dadosChegaram );
+}
