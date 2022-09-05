@@ -275,18 +275,18 @@ function tela3pt2() {
 
   const elemento2 = document.querySelector(".perguntas");
 
-  for (i = 0; i < qtdePerguntasInput; i++) {
+  for (contaPerguntas = 0; contaPerguntas < qtdePerguntasInput; contaPerguntas++) {
     elemento2.innerHTML += `
     <div class="perguntas">
         <div class="containerPerguntasAberto">
             <div class="pergunta1 titulos">
-                Pergunta ${i + 1}
+                Pergunta ${contaPerguntas + 1}
             </div>
             <div  class="tituloCriarQuizz caixaDeInputTela3">
-                <input class="titulo-input" type="text" placeholder="Texto da pergunta">
+                <input class="titulo-input inputP${1 + 10*contaPerguntas}" type="text" placeholder="Texto da pergunta">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input class="hex" type="text" placeholder="Cor de fundo da pergunta">
+                <input class="hex inputP${2 + 10*contaPerguntas}" type="text" placeholder="Cor de fundo da pergunta">
             </div>
 
 
@@ -294,10 +294,10 @@ function tela3pt2() {
                 Resposta correta
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input class="input-text" type="url" placeholder="Resposta correta">
+                <input class="input-text inputP${3 + 10*contaPerguntas}" type="url" placeholder="Resposta correta">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input type="text" class="input-url" placeholder="URL da imagem">
+                <input type="text" class="input-url inputP${4 + 10*contaPerguntas}" placeholder="URL da imagem">
             </div>
 
 
@@ -305,24 +305,24 @@ function tela3pt2() {
                 Respostas incorretas
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input class="input-incorreta" type="text" placeholder="Resposta incorreta 1">
+                <input class="input-incorreta inputP${5 + 10*contaPerguntas}" type="text" placeholder="Resposta incorreta 1">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input type="text" placeholder="URL da imagem 1">
+                <input class="inputP${6 + 10*contaPerguntas}" type="text" placeholder="URL da imagem 1">
             </div>
         
             <div class="tituloCriarRespostas caixaDeInputTela3">
-                <input  type="text" placeholder="Resposta incorreta 2">
+                <input class="inputP${7 + 10*contaPerguntas}" type="text" placeholder="Resposta incorreta 2">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input type="text" placeholder="URL da imagem 2">
+                <input class="inputP${8 + 10*contaPerguntas}" type="text" placeholder="URL da imagem 2">
             </div>
             
             <div class="tituloCriarRespostas caixaDeInputTela3">
-                <input  type="text" placeholder="Resposta incorreta 3">
+                <input class="inputP${9 + 10*contaPerguntas}" type="text" placeholder="Resposta incorreta 3">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
-                <input type="text" placeholder="URL da imagem 3">
+                <input class="inputP${10 + 10*contaPerguntas}" type="text" placeholder="URL da imagem 3">
             </div>
         </div>`;
   }
@@ -341,7 +341,7 @@ function tela3pt2() {
     </div>
 
 <div class="botao">
-    <button class="botaoProsseguir"  onclick="verificarInputs()">
+    <button class="botaoProsseguir"  onclick="verificarPerguntas()">
         Prosseguir para criar níveis
     </button>
     </div>
@@ -511,6 +511,108 @@ function verificarInformacoes() {
   }
 }
 
+function verificarPerguntas() {
+  console.log(
+    "Verificando perguntas, mas primeiro se as constantes ainda existem:"
+  );
+
+  const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
+  console.log(tituloCriarQuizz);
+
+  const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
+  console.log(urlCriarQuizz);
+
+  const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
+  console.log(qtdePerguntasInput);
+
+  const qtdeNiveisInput = document.querySelector(".divOculta4").innerHTML;
+  console.log(qtdeNiveisInput);
+
+  console.log("Vamos executar o contador.");
+  //Variáveis importantes antes de começar o contador
+  let contNiveis = 0;
+  let contPerguntas = 0;
+
+  saveInputTextoPerguntas = [];
+  saveInputCorPergunta = [];
+  saveInputRespostaCorreta = [];
+  saveInputUrlRespostaCorreta = [];
+  saveInputRespostaIncorreta1 = [];
+  saveInputUrlRespostaIncorreta1 = [];
+  saveInputRespostaIncorreta2 = [];
+  saveInputUrlRespostaIncorreta2 = [];
+  saveInputRespostaIncorreta3 = [];
+  saveInputUrlRespostaIncorreta3 = [];
+
+
+  contadorVerificarPerguntas();
+
+  function contadorVerificarPerguntas() {
+    console.log("contador sendo executado");
+    if (contPerguntas == qtdePerguntasInput ) {
+      contPerguntas = contPerguntas - 1;
+    }
+
+    console.log("Agora, se os inputs das perguntas estão em ordem:");
+
+    const inputTextoPerguntas = document.querySelector(`.inputP${1 + 10 * contPerguntas}`).value;
+    console.log(inputTextoPerguntas);
+
+    console.log(saveInputTextoPerguntas);
+    saveInputTextoPerguntas.push(inputTextoPerguntas);
+    console.log(saveInputTextoPerguntas);
+
+    const inputCorPergunta = document.querySelector(`.inputP${2 + 10 * contPerguntas}`).value;
+    console.log(inputCorPergunta);
+
+    console.log(saveInputCorPergunta);
+    saveInputCorPergunta.push(inputCorPergunta);
+    console.log(saveInputCorPergunta);
+
+    const inputRespostaCorreta = document.querySelector(`.inputP${3 + 10 * contPerguntas}`).value;
+    console.log(inputRespostaCorreta);
+
+    console.log(saveInputRespostaCorreta);
+    saveInputRespostaCorreta.push(inputRespostaCorreta);
+    console.log(saveInputRespostaCorreta);
+
+    inputUrlRespostaCorreta = document.querySelector(`.inputP${4 + 10 * contPerguntas}`).value;
+    console.log(inputUrlRespostaCorreta);
+
+    console.log(saveInputUrlRespostaCorreta);
+    saveInputUrlRespostaCorreta.push(inputUrlRespostaCorreta);
+    console.log(saveInputUrlRespostaCorreta);
+
+    const botao = document.querySelector(".botaoProsseguir");
+
+    if (contPerguntas !== qtdePerguntasInput) {
+      contPerguntas++;
+      console.log(`Valor do ContPerguntas: ${contPerguntas}`);
+    }
+    if (contNiveis !== qtdeNiveisInput) {
+      contNiveis++;
+      console.log(`Valor do ContNíveis: ${contNiveis}`);
+    }
+
+    if (
+      inputTextoPerguntas.length < 20 ||
+      !checkURL(inputUrlRespostaCorreta) ||
+      inputRespostaCorreta.length < 1
+    ) {
+      alert("Insira as informações corretas");
+    } else if (
+      contNiveis == qtdeNiveisInput &&
+      contPerguntas == qtdePerguntasInput 
+    ) {
+      console.log("tudo certo, QUIZZ CONCLUÍDO!");
+      tela3pt3();
+    } else {
+      console.log("ainda não, repetindo a função:");
+      contadorVerificarPerguntas();
+    }
+  }
+}
+
 function verificarNiveis() {
   console.log(
     "Verificando níveis, mas primeiro se as constantes ainda existem:"
@@ -575,9 +677,7 @@ function verificarNiveis() {
     saveUrlInputNiveis.push(urlInputNiveis);
     console.log(saveUrlInputNiveis);
 
-    const descricaoInputNiveis = document.querySelector(
-      `.input${4 + 4 * contNiveis}`
-    ).value;
+    const descricaoInputNiveis = document.querySelector(`.input${4 + 4 * contNiveis}`).value;
     console.log(descricaoInputNiveis);
 
     console.log(saveDescricaoInputNiveis);
@@ -625,25 +725,7 @@ function verificarNiveis() {
   }
 }
 
-function verificarInputs() {
-  let inputTitle = document.querySelector(".titulo-input").value;
-  let inputColor = document.querySelector(".hex");
-  let inputPergunta = document.querySelector(".input-text").value;
-  let urlInput = document.querySelector(".input-url").value;
-  let inputIncorreta = document.querySelector(".input-incorreta");
-  if (
-    inputTitle.length < 20 ||
-    inputPergunta === "" ||
-    inputIncorreta === "" ||
-    !checkURL(urlInput) ||
-    !checkColor(inputColor)
-  ) {
-    alert("Insira as informações corretas!");
-    tela3pt3();
-  } else {
-    tela3pt3();
-  }
-}
+
 
 function checkURL(urlInput) {
   const rule =
@@ -669,49 +751,49 @@ function recepcao() {
     image: urlCriarQuizz,
     questions: [
       {
-        title: "Título da pergunta 1",
-        color: "#123456",
+        title: saveInputTextoPerguntas[0],
+        color: saveInputCorPergunta[0],
         answers: [
           {
-            text: "Texto da resposta 1",
-            image: "https://http.cat/411.jpg",
+            text: saveInputRespostaCorreta[0],
+            image: saveInputUrlRespostaCorreta[0],
             isCorrectAnswer: true,
           },
           {
-            text: "Texto da resposta 2",
-            image: "https://http.cat/412.jpg",
+            text: saveInputRespostaIncorreta1[0],
+            image: saveInputUrlRespostaIncorreta1[0],
             isCorrectAnswer: false,
           },
         ],
       },
       {
-        title: "Título da pergunta 2",
-        color: "#123456",
+        title: saveInputTextoPerguntas[1],
+        color: saveInputCorPergunta[1],
         answers: [
           {
-            text: "Texto da resposta 1",
-            image: "https://http.cat/411.jpg",
+            text: saveInputRespostaCorreta[1],
+            image: saveInputUrlRespostaCorreta[1],
             isCorrectAnswer: true,
           },
           {
-            text: "Texto da resposta 2",
-            image: "https://http.cat/412.jpg",
+            text: saveInputRespostaIncorreta1[1],
+            image: saveInputUrlRespostaIncorreta1[1],
             isCorrectAnswer: false,
           },
         ],
       },
       {
-        title: "Título da pergunta 3",
-        color: "#123456",
+        title: saveInputTextoPerguntas[2],
+        color: saveInputCorPergunta[2],
         answers: [
           {
-            text: "Texto da resposta 1",
-            image: "https://http.cat/411.jpg",
+            text: saveInputRespostaCorreta[2],
+            image: saveInputUrlRespostaCorreta[2],
             isCorrectAnswer: true,
           },
           {
-            text: "Texto da resposta 2",
-            image: "https://http.cat/412.jpg",
+            text: saveInputRespostaIncorreta1[2],
+            image: saveInputUrlRespostaIncorreta1[2],
             isCorrectAnswer: false,
           },
         ],
@@ -740,6 +822,25 @@ function recepcao() {
       minValue: 50,
     });
   }
+  for (dan = 3; dan < qtdePerguntasInput ; dan++) {
+    dadosDoQuizzCriado.questions.push({
+      title: saveInputTextoPerguntas[dan],
+      color: saveInputCorPergunta[dan],
+      answers: [
+        {
+          text: saveInputRespostaCorreta[dan],
+          image: saveInputUrlRespostaCorreta[dan],
+          isCorrectAnswer: true,
+        },
+        {
+          text: saveInputRespostaIncorreta1[dan],
+          image: saveInputUrlRespostaIncorreta1[dan],
+          isCorrectAnswer: false,
+        },
+      ],
+    });
+  }
+
 
   const requisicao = axios.post(
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
