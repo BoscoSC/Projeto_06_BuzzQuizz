@@ -578,6 +578,10 @@ input {
   
 }
 
-.hidden {
+.hidden-erro {
   display: none;
+}
+.erro-input1, .erro-input2, .erro-input3, .erro-input4 {
+  color: red;
+  margin-bottom: 5px;
 }
