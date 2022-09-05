@@ -105,7 +105,7 @@ function tela2(quizzClicado) {
   elemento1.innerHTML =
     elemento1.innerHTML +
     `
-        <div class="nivelResultado">
+        <div class="nivelResultado hidden">
             
         </div>
 
@@ -134,6 +134,7 @@ function resetarRespostas() {
     element.parentNode.parentNode.classList.remove("done");
   });
   let nivel = document.querySelector(".nivelResultado");
+  nivel.classList.add("hidden");
   nivel.innerHTML = "";
 }
 
@@ -189,6 +190,7 @@ function revelaNivel(){
   }
 
   let elemento1 = document.querySelector(".nivelResultado");
+  elemento1.classList.remove("hidden");
   let idDoQuizz = document.querySelector(".conteudoTela2");
   idDoQuizz = idDoQuizz.id;
 
