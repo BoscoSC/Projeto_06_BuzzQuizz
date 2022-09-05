@@ -423,6 +423,7 @@ function verificarInformacoes() {
   let urlInput = document.querySelector(".input2").value;
   const qtdeNiveisInput = document.querySelector(".input4").value;
   const botao = document.querySelector(".botaoProsseguir");
+
   let error1 = false;
   let error2 = false;
   let error3 = false;
