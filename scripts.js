@@ -14,14 +14,9 @@ function recebeQuizz() {
   );
   promessa.then(carregarTodosQuizzes);
 }
-
 recebeQuizz();
 
-/* function processarResposta(resposta) {
-  console.log(resposta.data);
-  dadosDoQuizz = resposta.data;
-} */
-
+let dadosDoQuizz;
 function aleatorizador() {
   return Math.random() - 0.5;
 }
@@ -56,9 +51,10 @@ function tela2(quizzClicado) {
         <h2>${dadosDoQuizz[i].title}</h2>
     </div>
     
-    <div class="conteudoTela2">
+    <div class="conteudoTela2" id="${i}">
         
-    </div>`;
+    </div>
+  `;
 
   let elemento1 = document.querySelector(".conteudoTela2");
 
@@ -78,7 +74,8 @@ function tela2(quizzClicado) {
             </div>
 
 
-        </div>`;
+        </div>
+      `;
 
     let elemento2 = document.querySelectorAll(".opcoesPergunta");
     let elemento3 = elemento2[elemento2.length - 1];
@@ -108,24 +105,13 @@ function tela2(quizzClicado) {
   elemento1.innerHTML =
     elemento1.innerHTML +
     `
-        <div class="nivelResultado hidden">
-            <div class="nivelDoQuizz">
-                <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
-            </div>
-
-            <div class="nivelDescricao">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtJGCO6tTsDqCiz3wygan4VRUGeSh4TFDQWg&usqp=CAU" />
-                <p>
-                    Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop
-                    infinito de comida e clique no botão abaixo para usar o vira-tempo
-                    e reiniciar este teste.
-                </p>
-            </div>
+        <div class="nivelResultado">
+            
         </div>
 
         <div class="botoes">
             <button onclick="scrollar()" class="botaoReiniciar">Reiniciar Quizz</button>
-            <button class="voltarHome"><a href="index.html">Voltar pra home</a></button>
+            <button class="voltarHome"><a class="voltarHome" href="index.html">Voltar pra home</a></button>
         </div>
     `;
 }
@@ -145,23 +131,24 @@ function resetarRespostas() {
       "opcaoErrada"
     );
     element.setAttribute("onclick", "respostaSelecionada(this)");
+    element.parentNode.parentNode.classList.remove("done");
   });
   let nivel = document.querySelector(".nivelResultado");
-  nivel.classList.add("hidden");
+  nivel.innerHTML = "";
 }
 
 function respostaSelecionada(respostaSelecionada) {
   let scrollaProxPergunta =
     respostaSelecionada.parentNode.parentNode.nextElementSibling;
   let pai = respostaSelecionada.parentNode;
+  respostaSelecionada.parentNode.parentNode.classList.add("done");
   function scroll() {
     scrollaProxPergunta.scrollIntoView(true);
   }
   setTimeout(scroll, 2000);
 
-  for (let i = 1; i < pai.childNodes.length; i = i + 2) {
-    console.log(pai.childNodes[i]);
-    let filho = pai.childNodes[i];
+  for (let index = 1; index < pai.childNodes.length; index = index + 2) {
+    let filho = pai.childNodes[index];
     if (filho.id === "correta") {
       filho.classList.add("opcaoCerta");
       filho.classList.add("opcaoNaoSelecionada");
@@ -173,6 +160,58 @@ function respostaSelecionada(respostaSelecionada) {
     }
   }
   respostaSelecionada.classList.remove("opcaoNaoSelecionada");
+  let perguntasTotal = document.getElementsByClassName("pergunta");
+  let perguntasRespondidas = document.getElementsByClassName("done");
+  if(perguntasRespondidas.length === perguntasTotal.length){
+    setTimeout(revelaNivel,1999);
+  }
+}
+
+function revelaNivel(){
+  let perguntasTotal = document.getElementsByClassName("pergunta");
+  let perguntasRespondidas = document.getElementsByClassName("done");
+  let porcentagemNivel;
+  let auxiliar;
+
+  if(perguntasRespondidas.length === perguntasTotal.length){
+    let OpcaoCerta = document.getElementsByClassName("opcaoCerta");
+    auxiliar = 0;
+
+    for(let i = 0; i < OpcaoCerta.length; i++){
+      let listaClasses = OpcaoCerta[i].classList;
+
+      if(listaClasses.length === 2){
+        auxiliar++;
+      }
+    }
+
+    porcentagemNivel = Math.round((auxiliar/OpcaoCerta.length)*100);
+  }
+
+  let elemento1 = document.querySelector(".nivelResultado");
+  let idDoQuizz = document.querySelector(".conteudoTela2");
+  idDoQuizz = idDoQuizz.id;
+
+  let elemento;
+  let levels = dadosDoQuizz[idDoQuizz].levels.length;
+  let w = 0;
+
+  for (let variavel = 0; variavel < levels; variavel++){
+    if(porcentagemNivel >= dadosDoQuizz[idDoQuizz].levels[variavel].minValue){
+      w = variavel;
+    }
+  }
+
+  elemento = `
+    <div class="nivelDoQuizz">
+      <p>${porcentagemNivel}% de acerto: ${dadosDoQuizz[idDoQuizz].levels[w].title}</p>
+    </div>
+    <div class="nivelDescricao">
+      <img src="${dadosDoQuizz[idDoQuizz].levels[w].image}" />
+      <p>${dadosDoQuizz[idDoQuizz].levels[w].text}</p>
+    </div>
+  `
+  elemento1.innerHTML = elemento;
 }
 
 function tela3pt1() {
