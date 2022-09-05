@@ -27,9 +27,9 @@ function carregarTodosQuizzes(resposta) {
 
   for (let i = 0; i < dadosDoQuizz.length; i++) {
     const todosQuizzes = document.querySelector(".todosQuizz");
-    todosQuizzes.innerHTML += `<div class="quizzesCaixa">
+    todosQuizzes.innerHTML += `<div class="quizzesCaixa" data-identifier="general-quizzes">
                <div onclick="tela2(this)" id="${i}">
-                 <div class="quizzDisplay">
+                 <div class="quizzDisplay" data-identifier="quizz-card">
                    <img src="${dadosDoQuizz[i].image}"/>
                    <p>
                      ${dadosDoQuizz[i].title}
@@ -105,7 +105,7 @@ function tela2(quizzClicado) {
   elemento1.innerHTML =
     elemento1.innerHTML +
     `
-        <div class="nivelResultado hidden">
+        <div class="nivelResultado hidden" data-identifier="quizz-result">
             
         </div>
 
@@ -223,7 +223,7 @@ function tela3pt1() {
 </div>
 <div class="informacoesBasicas">
     <div class="tituloCriarQuizz caixaDeInputTela3">
-        <input class="input1" id=”placeholder-text” type="text" placeholder="Título do seu quizz" required minlength="20" maxlength="65">
+        <input class="input1" id=”placeholder-text” type="text" placeholder="Título do seu quizz" required minlength="20" maxlength="65" >
     </div>
     <div class="erro1 hidden">
     <p class="erro-input1">Insira entre 20 e 65 caracateres!</p>
@@ -281,11 +281,11 @@ function tela3pt2() {
     elemento2.innerHTML += `
     <div class="perguntas">
         <div class="containerPerguntasAberto">
-            <div class="pergunta1 titulos">
+            <div class="pergunta1 titulos" data-identifier="question-form">
                 Pergunta ${contaPerguntas + 1}
             </div>
             <div  class="tituloCriarQuizz caixaDeInputTela3">
-                <input class="titulo-input inputP${1 + 10*contaPerguntas}" type="text" placeholder="Texto da pergunta">
+                <input class="titulo-input inputP${1 + 10*contaPerguntas}" type="text" placeholder="Texto da pergunta" data-identifier="question">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input class="hex inputP${2 + 10*contaPerguntas}" type="text" placeholder="Cor de fundo da pergunta">
@@ -296,7 +296,7 @@ function tela3pt2() {
                 Resposta correta
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input class="input-text inputP${3 + 10*contaPerguntas}" type="url" placeholder="Resposta correta">
+                <input class="input-text inputP${3 + 10*contaPerguntas}" type="url" placeholder="Resposta correta" data-identifier="answer">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input type="text" class="input-url inputP${4 + 10*contaPerguntas}" placeholder="URL da imagem">
@@ -307,14 +307,14 @@ function tela3pt2() {
                 Respostas incorretas
             </div>
             <div class="tituloCriarQuizz caixaDeInputTela3">
-                <input class="input-incorreta inputP${5 + 10*contaPerguntas}" type="text" placeholder="Resposta incorreta 1">
+                <input class="input-incorreta inputP${5 + 10*contaPerguntas}" type="text" placeholder="Resposta incorreta 1" data-identifier="answer">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input class="inputP${6 + 10*contaPerguntas}" type="text" placeholder="URL da imagem 1">
             </div>
         
             <div class="tituloCriarRespostas caixaDeInputTela3">
-                <input class="inputP${7 + 10*contaPerguntas}" type="text" placeholder="Resposta incorreta 2">
+                <input class="inputP${7 + 10*contaPerguntas}" type="text" placeholder="Resposta incorreta 2" data-identifier="answer">
             </div>
             <div class="urlCriarQuizz caixaDeInputTela3">
                 <input class="inputP${8 + 10*contaPerguntas}" type="text" placeholder="URL da imagem 2">
@@ -368,7 +368,7 @@ function tela3pt3() {
   const elemento2 = document.querySelector(".niveis");
 
   for (contaNiveis = 0; contaNiveis < qtdeNiveisInput; contaNiveis++) {
-    elemento2.innerHTML += `<div class="niveis">
+    elemento2.innerHTML += `<div class="niveis" data-identifier="level">
         <div class="containerNiveisAberto">
             <div class="nível1 titulos">
                 Nível ${contaNiveis + 1}
