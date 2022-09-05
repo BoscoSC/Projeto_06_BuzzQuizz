@@ -785,49 +785,49 @@ function recepcao() {
     image: urlCriarQuizz,
     questions: [
       {
-        title: 'saveInputTextoPerguntas[0]',
-        color: 'saveInputCorPergunta[0]',
+        title: saveInputTextoPerguntas[0],
+        color: saveInputCorPergunta[0],
         answers: [
           {
-            text: "saveInputRespostaCorreta[0]",
-            image: 'saveInputUrlRespostaCorreta[0]',
+            text: saveInputRespostaCorreta[0],
+            image: saveInputUrlRespostaCorreta[0],
             isCorrectAnswer: true,
           },
           {
-            text: "saveInputRespostaIncorreta1[0]",
-            image: 'saveInputUrlRespostaIncorreta1[0]',
+            text: saveInputRespostaIncorreta1[0],
+            image: saveInputUrlRespostaIncorreta1[0],
             isCorrectAnswer: false,
           },
         ],
       },
       {
-        title: "saveInputTextoPerguntas[1]",
-        color: "saveInputCorPergunta[1]",
+        title: saveInputTextoPerguntas[1],
+        color: saveInputCorPergunta[1],
         answers: [
           {
-            text: "saveInputRespostaCorreta[1]",
-            image: 'saveInputUrlRespostaCorreta[1]',
+            text: saveInputRespostaCorreta[1],
+            image: saveInputUrlRespostaCorreta[1],
             isCorrectAnswer: true,
           },
           {
-            text: 'saveInputRespostaIncorreta1[1]',
-            image: 'saveInputUrlRespostaIncorreta1[1]',
+            text: saveInputRespostaIncorreta1[1],
+            image: saveInputUrlRespostaIncorreta1[1],
             isCorrectAnswer: false,
           },
         ],
       },
       {
-        title: "saveInputTextoPerguntas[2]",
-        color: "saveInputCorPergunta[2]",
+        title: saveInputTextoPerguntas[2],
+        color: saveInputCorPergunta[2],
         answers: [
           {
-            text: "saveInputRespostaCorreta[2]",
-            image: 'saveInputUrlRespostaCorreta[2]',
+            text: saveInputRespostaCorreta[2],
+            image: saveInputUrlRespostaCorreta[2],
             isCorrectAnswer: true,
           },
           {
-            text: "saveInputRespostaIncorreta1"[2],
-            image: 'saveInputUrlRespostaIncorreta1[2]',
+            text: saveInputRespostaIncorreta1[2],
+            image: saveInputUrlRespostaIncorreta1[2],
             isCorrectAnswer: false,
           },
         ],
@@ -835,15 +835,15 @@ function recepcao() {
     ],
     levels: [
       {
-        title: 'saveInputTituloNiveis[0]',
-        image: 'saveUrlInputNiveis[0]',
-        text: 'saveDescricaoInputNiveis[0]',
+        title: saveInputTituloNiveis[0],
+        image: saveUrlInputNiveis[0],
+        text: saveDescricaoInputNiveis[0],
         minValue: 0,
       },
       {
-        title: 'saveInputTituloNiveis[1]',
-        image: 'saveUrlInputNiveis[1]',
-        text: 'saveDescricaoInputNiveis[1]',
+        title: saveInputTituloNiveis[1],
+        image: saveUrlInputNiveis[1],
+        text: saveDescricaoInputNiveis[1],
         minValue: 50,
       },
     ],
