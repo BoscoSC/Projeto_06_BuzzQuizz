@@ -557,16 +557,17 @@ function verificarNiveis() {
 ) {
     alert("Insira as informações corretas");
   } else
-  
-  if(k < 1){
-    alert("Insira as informações corretas");
-  } 
+
+  if (contNiveis == qtdeNiveisInput && k < 1){
+    alert('Insira as informações corretas');
+    tela3pt3();
+  }else
   if(contNiveis == qtdeNiveisInput && contPerguntas == qtdePerguntasInput && k > 0){
 
     console.log('tudo certo, QUIZZ CONCLUÍDO!')
     recepcao();
     tela3pt4();
-  }else {
+  } else {
      console.log('ainda não, repetindo a função:')
      contadorVerificarNiveis();}
     
