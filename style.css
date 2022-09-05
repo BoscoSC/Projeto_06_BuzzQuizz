@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  word-break: break-all;
 }
 
 body {
@@ -9,6 +10,7 @@ body {
   align-items: center;
 
   font-family: "Roboto", sans-serif;
+  background-color: #FAFAFA;
 }
 .header {
   width: 100%;
@@ -31,13 +33,14 @@ h1 {
   line-height: 43px;
   color: #ffffff;
 }
+
 .criarQuizz {
   box-sizing: border-box;
 
-  width: 340px;
+  width: 100%;
   height: 181px;
 
-  margin-top: 100px;
+  margin: 100px 17px 0 17px;
 
   background: #fafafa;
   border: 1px dashed #d5d5d5;
@@ -48,7 +51,7 @@ h1 {
   align-items: center;
 }
 .textoCriarQuizz {
-  width: 250px;
+  /* width: 250px; */
 
   font-style: normal;
   font-weight: 400;
@@ -89,12 +92,10 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-
 }
 
 .todosQuizz {
-  margin-top: 35px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -104,7 +105,7 @@ h1 {
 
 }
 .h2 {
-  margin-left: 75px;
+  margin: 35px 0 0 17px;
   font-weight: 700;
   font-size: 20px;
 }
@@ -132,7 +133,7 @@ h2 {
     #000000 100%
   );
   border-radius: 5px;
-  margin: 15px 12px;
+  margin: 10px 5px;
 }
 
 .quizzDisplay img {
@@ -144,6 +145,7 @@ h2 {
 }
 
 .quizzDisplay p {
+  width: 100%;
   position: absolute;
   bottom: 10px;
   left: 18px;
@@ -260,6 +262,7 @@ h2 {
 }
 
 .opcao p {
+  width: 100%;
   font-weight: 700;
   font-size: 13px;
 }
@@ -388,7 +391,6 @@ input {
 
 .perguntas {
   margin-top: 29px;
-  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -449,7 +451,6 @@ input {
 }
 .niveis {
   margin-top: 29px;
-  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -584,4 +585,61 @@ input {
 .erro-input1, .erro-input2, .erro-input3, .erro-input4 {
   color: red;
   margin-bottom: 5px;
+}
+
+@media (min-width: 1100px) {
+	.conteudo{
+    width: 1050px;
+  }
+
+  .h2 {
+    margin: 80px 0 0 0;
+  }
+
+  .informacoesBasicas {
+    width: 600px;
+  }
+
+  .botaoProsseguir{
+    width: 370px;
+  }
+
+  .containerPerguntasAberto {
+    width: 600px;
+  }
+
+  .caixaDeInputTela3 {
+    width: 564px;
+  }
+
+  .containerNiveisAberto{
+    width: 600px;
+    height: auto;
+  }
+
+  .containerNiveisFechado{
+    width: 600px;
+  }
+
+  .caixaDeInputDescricao{
+    box-sizing: border-box;
+    
+    display: flex;
+    align-items: center;
+    
+    width: 564px;
+    height: 46px;
+    
+    margin-bottom: 9px;
+    padding-left: 14px;
+    
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    
+    background: #ffffff;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+  }
 }
