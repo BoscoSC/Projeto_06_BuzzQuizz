@@ -452,15 +452,13 @@ function tela3pt4() {
     
     <img src="${urlCriarQuizz}"/>
 
-    <a href="">
+    
     <div class="botaoAcessar">
         Acessar Quizz
     </div>
-    </a>
+    
+    <button class="voltarHome"><a class="voltarHome" href="index.html">Voltar home</a></button>
 
-        <div on click="">
-            Voltar home
-        </div>
        
     <br/><br/><br/><br/>
     </div>
@@ -775,6 +773,7 @@ function checkColor(inputColor) {
 // java para postar quizz criado;
 
 function recepcao() {
+  
   const tituloCriarQuizz = document.querySelector(".divOculta1").innerHTML;
   const urlCriarQuizz = document.querySelector(".divOculta2").innerHTML;
   const qtdePerguntasInput = document.querySelector(".divOculta3").innerHTML;
