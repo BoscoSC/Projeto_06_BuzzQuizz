@@ -423,6 +423,7 @@ function verificarInformacoes() {
   let urlInput = document.querySelector(".input2").value;
   const qtdeNiveisInput = document.querySelector(".input4").value;
   const botao = document.querySelector(".botaoProsseguir");
+
   if (
     inputTitulo.length < 20 ||
     inputTitulo.length > 65 ||
@@ -432,9 +433,49 @@ function verificarInformacoes() {
   ) {
     alert("Insira as informações corretas");
   } else {
+
+  let error1;
+  let error2;
+  let error3;
+  let error4;
+
+  if (inputTitulo.length < 20 || inputTitulo.length > 65) {
+    document.querySelector(".erro1").classList.remove("hidden");
+    error1 = false
+    console.log(error1)
+  } else {
+    document.querySelector(".erro1").classList.add("hidden");
+    error1 = true;
+  }
+  if (!checkURL(urlInput)) {
+    document.querySelector(".erro2").classList.remove("hidden");
+    error2 = false
+    console.log(error2)
+  } else {
+    document.querySelector(".erro2").classList.add("hidden");
+    error2 = true;
+  }
+  if (qtdePerguntasInput < 3) {
+    document.querySelector(".erro3").classList.remove("hidden");
+    error3 = false
+    console.log(error3)
+  } else {
+    document.querySelector(".erro3").classList.add("hidden");
+    error3 = true;
+  }
+  if (qtdeNiveisInput < 2) {
+    document.querySelector(".erro4").classList.remove("hidden");
+    error4 = false
+    console.log(error4)
+  } else {
+    document.querySelector(".erro4").classList.add("hidden");
+    error4 = true;
+  }
+  if((error1 && error2 && error3 && error4) === true){
     tela3pt2();
   }
 
+}
 }
 
 
