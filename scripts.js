@@ -14,13 +14,21 @@ function recebeQuizz() {
   );
   promessa.then(carregarTodosQuizzes);
 }
+
 recebeQuizz();
+
+
+
+/* function processarResposta(resposta) {
+  console.log(resposta.data);
+  dadosDoQuizz = resposta.data;
+} */
 
 function aleatorizador() {
   
   return Math.random() - 0.5;
 }
-let dadosDoQuizz;
+
 function carregarTodosQuizzes(resposta) {
   dadosDoQuizz = resposta.data;
   console.log(dadosDoQuizz);
@@ -42,7 +50,9 @@ function carregarTodosQuizzes(resposta) {
 carregarTodosQuizzes();
 
 function tela2(quizzClicado) {
+ 
   let i = quizzClicado.id;
+
   let elemento = document.querySelector(".conteudo");
   elemento.innerHTML = `
     <div class="nomeQuizz">
@@ -50,10 +60,9 @@ function tela2(quizzClicado) {
         <h2>${dadosDoQuizz[i].title}</h2>
     </div>
     
-    <div class="conteudoTela2" id="${i}">
+    <div class="conteudoTela2">
         
-    </div>
-  `;
+    </div>`;
 
   let elemento1 = document.querySelector(".conteudoTela2");
 
@@ -73,8 +82,7 @@ function tela2(quizzClicado) {
             </div>
 
 
-        </div>
-      `;
+        </div>`;
 
     let elemento2 = document.querySelectorAll(".opcoesPergunta");
     let elemento3 = elemento2[elemento2.length - 1];
@@ -99,20 +107,29 @@ function tela2(quizzClicado) {
             `;
       }
     }
-    let nomeDoQuizz = document.querySelector(".nomeQuizz");
-    nomeDoQuizz.scrollIntoView({ behavior: "smooth", block: "end" });
   }
 
   elemento1.innerHTML =
     elemento1.innerHTML +
     `
-        <div class="nivelResultado">
+        <div class="nivelResultado hidden">
+            <div class="nivelDoQuizz">
+                <p>88% de acerto: Você é praticamente um aluno de Hogwarts!</p>
+            </div>
 
+            <div class="nivelDescricao">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtJGCO6tTsDqCiz3wygan4VRUGeSh4TFDQWg&usqp=CAU" />
+                <p>
+                    Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop
+                    infinito de comida e clique no botão abaixo para usar o vira-tempo
+                    e reiniciar este teste.
+                </p>
+            </div>
         </div>
 
         <div class="botoes">
             <button onclick="scrollar()" class="botaoReiniciar">Reiniciar Quizz</button>
-            <button class="voltarHome"><a class="voltarHome" href="index.html">Voltar pra home</a></button>
+            <button class="voltarHome"><a href="index.html">Voltar pra home</a></button>
         </div>
     `;
     
@@ -122,6 +139,7 @@ function scrollar() {
   const nomeDoQuizz = document.querySelector(".nomeQuizz");
   nomeDoQuizz.scrollIntoView({ behavior: "smooth", block: "end" });
   resetarRespostas();
+  
 }
 
 function resetarRespostas() {
@@ -129,92 +147,34 @@ function resetarRespostas() {
   opcao.forEach(function (element) {
     element.classList.remove("opcaoNaoSelecionada", "opcaoCerta", "opcaoErrada");
     element.setAttribute("onclick","respostaSelecionada(this)");
-    element.parentNode.parentNode.classList.remove("done");
   });
   let nivel = document.querySelector(".nivelResultado");
-  nivel.innerHTML = "";
+  nivel.classList.add("hidden");
 }
 
 function respostaSelecionada(respostaSelecionada) {
   let scrollaProxPergunta = respostaSelecionada.parentNode.parentNode.nextElementSibling;
   let pai = respostaSelecionada.parentNode;
-  respostaSelecionada.parentNode.parentNode.classList.add("done");
-
   function scroll() {
     scrollaProxPergunta.scrollIntoView(true);
   }
   setTimeout(scroll, 2000);
-  
-  for (let index = 1; index < pai.childNodes.length; index = index + 2) {
-    let filho = pai.childNodes[index];
 
+  for (let i = 1; i < pai.childNodes.length; i = i + 2) {
+    console.log(pai.childNodes[i]);
+    let filho = pai.childNodes[i];
     if (filho.id === "correta") {
       filho.classList.add("opcaoCerta");
       filho.classList.add("opcaoNaoSelecionada");
       filho.removeAttribute("onclick");
-    } 
-
-    else {
+    } else {
       filho.classList.add("opcaoErrada");
       filho.classList.add("opcaoNaoSelecionada");
       filho.removeAttribute("onclick");
     }
   }
-
   respostaSelecionada.classList.remove("opcaoNaoSelecionada");
-  let perguntasTotal = document.getElementsByClassName("pergunta");
-  let perguntasRespondidas = document.getElementsByClassName("done");
-  if(perguntasRespondidas.length === perguntasTotal.length){
-    setTimeout(revelaNivel,1999);
-  }
-}
-
-function revelaNivel(){
-  let perguntasTotal = document.getElementsByClassName("pergunta");
-  let perguntasRespondidas = document.getElementsByClassName("done");
-  let porcentagemNivel;
-  let auxiliar;
-
-  if(perguntasRespondidas.length === perguntasTotal.length){
-    let OpcaoCerta = document.getElementsByClassName("opcaoCerta");
-    auxiliar = 0;
-
-    for(let i = 0; i < OpcaoCerta.length; i++){
-      let listaClasses = OpcaoCerta[i].classList;
-
-      if(listaClasses.length === 2){
-        auxiliar++;
-      }
-    }
-
-    porcentagemNivel = Math.round((auxiliar/OpcaoCerta.length)*100);
-  }
-
-  let elemento1 = document.querySelector(".nivelResultado");
-  let idDoQuizz = document.querySelector(".conteudoTela2");
-  idDoQuizz = idDoQuizz.id;
-
-  let elemento;
-  let levels = dadosDoQuizz[idDoQuizz].levels.length;
-  let w = 0;
-
-  for (let variavel = 0; variavel < levels; variavel++){
-    if(porcentagemNivel >= dadosDoQuizz[idDoQuizz].levels[variavel].minValue){
-      w = variavel;
-    }
-  }
-  
-  elemento = `
-    <div class="nivelDoQuizz">
-      <p>${porcentagemNivel}% de acerto: ${dadosDoQuizz[idDoQuizz].levels[w].title}</p>
-    </div>
-
-    <div class="nivelDescricao">
-      <img src="${dadosDoQuizz[idDoQuizz].levels[w].image}" />
-      <p>${dadosDoQuizz[idDoQuizz].levels[w].text}</p>
-    </div>
-  `
-  elemento1.innerHTML = elemento;
+ 
 }
 
 function tela3pt1() {
@@ -463,28 +423,16 @@ function verificarInformacoes() {
   let urlInput = document.querySelector(".input2").value;
   const qtdeNiveisInput = document.querySelector(".input4").value;
   const botao = document.querySelector(".botaoProsseguir");
-
-  if (
-    inputTitulo.length < 20 ||
-    inputTitulo.length > 65 ||
-    !checkURL(urlInput) ||
-    qtdePerguntasInput < 3 ||
-    qtdeNiveisInput < 2
-  ) {
-    alert("Insira as informações corretas");
-  } else {
-
-  let error1;
-  let error2;
-  let error3;
-  let error4;
+  let error1 = false;
+  let error2 = false;
+  let error3 = false;
+  let error4 = false;
 
   if (inputTitulo.length < 20 || inputTitulo.length > 65) {
     document.querySelector(".erro1").classList.remove("hidden");
     error1 = false
     console.log(error1)
   } else {
-    document.querySelector(".erro1").classList.add("hidden");
     error1 = true;
   }
   if (!checkURL(urlInput)) {
@@ -492,7 +440,6 @@ function verificarInformacoes() {
     error2 = false
     console.log(error2)
   } else {
-    document.querySelector(".erro2").classList.add("hidden");
     error2 = true;
   }
   if (qtdePerguntasInput < 3) {
@@ -500,7 +447,6 @@ function verificarInformacoes() {
     error3 = false
     console.log(error3)
   } else {
-    document.querySelector(".erro3").classList.add("hidden");
     error3 = true;
   }
   if (qtdeNiveisInput < 2) {
@@ -508,14 +454,14 @@ function verificarInformacoes() {
     error4 = false
     console.log(error4)
   } else {
-    document.querySelector(".erro4").classList.add("hidden");
     error4 = true;
   }
   if((error1 && error2 && error3 && error4) === true){
     tela3pt2();
+  } else {
+    alert('Digite os campos válidos!')
   }
 
-}
 }
 
 
